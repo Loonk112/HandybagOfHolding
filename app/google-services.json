@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "72737073830",
+    "project_id": "handybag-of-holding",
+    "storage_bucket": "handybag-of-holding.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72737073830:android:7e7a5bc8ec72054c3ca267",
+        "android_client_info": {
+          "package_name": "com.example.handybagofholding"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcv4BDL_3tOE_ZfbAQU3gomg1_2bvK7AM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72737073830:android:2d6a4feebc5689163ca267",
+        "android_client_info": {
+          "package_name": "com.handibagofholding"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcv4BDL_3tOE_ZfbAQU3gomg1_2bvK7AM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
