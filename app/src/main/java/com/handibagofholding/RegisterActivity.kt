@@ -25,6 +25,7 @@ class RegisterActivity : AppCompatActivity() {
         tv_login.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         b_registerConfirm.setOnClickListener {
@@ -72,10 +73,8 @@ class RegisterActivity : AppCompatActivity() {
 
                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                        .addOnCompleteListener { task ->
-
                            //Success check
                            if (task.isSuccessful) {
-                               val firebaseUser: FirebaseUser = task.result!!.user!!
 
                                Toast.makeText(
                                    this@RegisterActivity,
@@ -83,15 +82,15 @@ class RegisterActivity : AppCompatActivity() {
                                    Toast.LENGTH_SHORT
                                ).show()
 
+                               //Logging out
+                               FirebaseAuth.getInstance().signOut()
+
                                //Moving to login - clearing past activities
                                val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                                intent.flags =
                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                               intent.putExtra("user_id", firebaseUser.uid)
-                               intent.putExtra("email_id", email)
                                startActivity(intent)
                                finish()
-
                            } else {
                                Toast.makeText(
                                    this@RegisterActivity,
