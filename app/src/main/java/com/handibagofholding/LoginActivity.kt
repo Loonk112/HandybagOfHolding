@@ -17,7 +17,6 @@ class LoginActivity : AppCompatActivity() {
 
         if (FirebaseAuth.getInstance().currentUser != null)
         {
-
             Toast.makeText(this@LoginActivity, "Welcome back!", Toast.LENGTH_SHORT).show()
 
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
