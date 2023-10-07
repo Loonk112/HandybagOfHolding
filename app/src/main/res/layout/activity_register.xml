@@ -18,6 +18,17 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
+        android:id="@+id/et_username"
+        android:hint="Username"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_email"/>
+
+    <EditText
         android:id="@+id/et_password1"
         android:hint="Password"
         android:textSize="20sp"
@@ -26,7 +37,7 @@
         android:layout_margin="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_email"
+        app:layout_constraintTop_toBottomOf="@+id/et_username"
         android:inputType="textPassword" />
 
     <EditText

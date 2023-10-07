@@ -12,9 +12,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        findViewById<TextView>(R.id.tv_topBarMainText).text = FirebaseAuth.getInstance().uid
-
         findViewById<Button>(R.id.b_signOut).setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             val intent: Intent = Intent(this@MainActivity, LoginActivity::class.java)

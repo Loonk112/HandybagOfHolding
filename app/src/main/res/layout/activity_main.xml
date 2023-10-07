@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- TODO: Remove later!!! -->
     <LinearLayout
         android:id="@+id/ll_topBar"
         android:layout_width="match_parent"
@@ -14,21 +15,6 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:background="@color/blue">
-        <ImageButton
-            android:id="@+id/ib_topBarReturn"
-            android:enabled="false"
-            android:visibility="invisible"
-            android:layout_width="0px"
-            android:layout_weight="1"
-            android:layout_height="match_parent"/>
-        <TextView
-            android:gravity="center"
-            android:text="TOP TEXT"
-            android:id="@+id/tv_topBarMainText"
-            android:layout_width="0px"
-            android:layout_weight="2"
-            android:layout_height="match_parent"
-            android:textSize="20sp"/>
         <Button
             android:id="@+id/b_signOut"
             android:text="Sign out"
@@ -38,16 +24,17 @@
             android:textSize="15sp"/>
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/fl_primaryDisplay"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_topBar"
-        app:layout_constraintBottom_toTopOf="@id/bn_primaryNavigationBar"/>
-
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/main_nav_graph" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bn_primaryNavigationBar"
+        app:menu="@menu/bottom_nav_bar_menu"
         android:layout_width="match_parent"
         android:minHeight="50sp"
         android:layout_height="wrap_content"

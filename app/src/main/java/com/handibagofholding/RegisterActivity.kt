@@ -3,6 +3,7 @@ package com.handibagofholding
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -10,13 +11,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 
 class RegisterActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+
         val et_email = findViewById<EditText>(R.id.et_email)
+        val et_username = findViewById<EditText>(R.id.et_username)
         val et_password1 = findViewById<EditText>(R.id.et_password1)
         val et_password2 = findViewById<EditText>(R.id.et_password2)
         val tv_login = findViewById<TextView>(R.id.tv_login)
@@ -29,7 +36,6 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         b_registerConfirm.setOnClickListener {
-
            when {
                TextUtils.isEmpty(et_email.text.toString().trim {it <= ' '}) ->
                {
@@ -38,7 +44,12 @@ class RegisterActivity : AppCompatActivity() {
 
                !et_email.text.toString().trim {it <= ' '}.contains('@') ->
                {
-                   Toast.makeText(this@RegisterActivity, "Email can must be valid.", Toast.LENGTH_SHORT).show()
+                   Toast.makeText(this@RegisterActivity, "Email must be valid.", Toast.LENGTH_SHORT).show()
+               }
+
+               TextUtils.isEmpty(et_username.text.toString().trim {it <= ' '}) ->
+               {
+                   Toast.makeText(this@RegisterActivity, "Username can not be empty.", Toast.LENGTH_SHORT).show()
                }
 
                TextUtils.isEmpty(et_password1.text.toString().trim {it <= ' '}) ->
@@ -75,22 +86,38 @@ class RegisterActivity : AppCompatActivity() {
                        .addOnCompleteListener { task ->
                            //Success check
                            if (task.isSuccessful) {
-
                                Toast.makeText(
                                    this@RegisterActivity,
                                    "You were registered successfully.",
                                    Toast.LENGTH_SHORT
                                ).show()
 
-                               //Logging out
-                               FirebaseAuth.getInstance().signOut()
+                               val username = et_username.text.toString().trim { it <= ' '}
 
-                               //Moving to login - clearing past activities
-                               val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                               intent.flags =
-                                   Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                               startActivity(intent)
-                               finish()
+                               val user = hashMapOf(
+                                   "username" to "$username"
+                               )
+
+                               Log.d("FirebaseCode", "Creating document")
+
+                               val db = Firebase.firestore
+
+                               db.collection("users").document("${FirebaseAuth.getInstance().currentUser?.uid}")
+                                   .set(user)
+                                   .addOnSuccessListener {
+                                       Log.d("FirebaseCode", "DocumentSnapshot successfully written!")
+                                   }
+                                   .addOnFailureListener { e ->
+                                       Log.w("FirebaseCode", "Error writing document", e)
+                                   }.addOnCompleteListener {
+                                       FirebaseAuth.getInstance().signOut()
+                                       //Moving to login - clearing past activities
+                                       val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                                       intent.flags =
+                                           Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                       startActivity(intent)
+                                       finish()
+                                   }
                            } else {
                                Toast.makeText(
                                    this@RegisterActivity,
@@ -99,10 +126,9 @@ class RegisterActivity : AppCompatActivity() {
                                ).show()
                            }
                        }
+
                }
            }
-
-
 
 
         }
