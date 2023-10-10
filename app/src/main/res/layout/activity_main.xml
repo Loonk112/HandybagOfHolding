@@ -8,6 +8,7 @@
 
     <!-- TODO: Remove later!!! -->
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/ll_topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +29,9 @@
         android:id="@+id/fragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0px"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bn_primaryNavigationBar"
         app:defaultNavHost="true"
         app:navGraph="@navigation/main_nav_graph" />
 
