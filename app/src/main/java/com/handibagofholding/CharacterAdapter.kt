@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
 class CharacterAdapter (private val characterList: ArrayList<CharacterMetaData>): RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
@@ -23,6 +25,10 @@ class CharacterAdapter (private val characterList: ArrayList<CharacterMetaData>)
 
         holder.tv_characterName.text = CharacterViewModel.name
 
+        holder.myItemView.setOnClickListener {
+            Navigation.findNavController(holder.myItemView).navigate(R.id.action_charactersFragment_to_characterMainFragment)
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -31,6 +37,6 @@ class CharacterAdapter (private val characterList: ArrayList<CharacterMetaData>)
 
     class ViewHolder(private val itemView: View): RecyclerView.ViewHolder(itemView) {
         val tv_characterName = itemView.findViewById<TextView>(R.id.tv_characterName)
-
+        val myItemView = itemView
     }
 }
