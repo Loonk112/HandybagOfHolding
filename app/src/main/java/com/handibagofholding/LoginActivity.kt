@@ -15,6 +15,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        //Clearing VM data
+        ViewModel.clearAccountData()
+
         if (FirebaseAuth.getInstance().currentUser != null)
         {
             Toast.makeText(this@LoginActivity, "Welcome back!", Toast.LENGTH_SHORT).show()
@@ -68,13 +71,10 @@ class LoginActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             ).show()
 
-                            //Moving to login - clearing past activities
-
                             ViewModel.account = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
                             val intent = Intent(this@LoginActivity, AccountActivity::class.java)
-                            intent.flags =
-                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
                             finish()
                         } else {

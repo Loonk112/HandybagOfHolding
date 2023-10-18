@@ -29,15 +29,17 @@ class AccountFragment : Fragment() {
 
         val login = view.findViewById<TextView>(R.id.tv_login)
 
+        view.findViewById<TextView>(R.id.tv_email).text = FirebaseAuth.getInstance().currentUser?.email.toString()
+
         FirebaseFirestore.getInstance().collection("users").document("${ViewModel.account}")
             .addSnapshotListener { snapshot, e ->
                 if (e != null) {
-                    Log.w("FirestoreResults", "Listen failed.", e)
+                    Log.e("FirestoreResults", "Listen failed.", e)
                     return@addSnapshotListener
                 }
-                Log.w("FirestoreResults", "${snapshot?.data}")
+                Log.d("FirestoreResults", "${snapshot?.data}")
                 if (snapshot != null && snapshot.exists()) {
-                    login.text = snapshot.get("username").toString()
+                    login.text = snapshot.get("name").toString()
                 } else {
                     Log.d("FirestoreResults", "Current data: null")
                 }
@@ -46,11 +48,9 @@ class AccountFragment : Fragment() {
 
         view.findViewById<Button>(R.id.b_signOut).setOnClickListener {
             FirebaseAuth.getInstance().signOut()
-            ViewModel.clearAccountData()
             activity?.let {
                 val intent: Intent = Intent(it, LoginActivity::class.java)
-                intent.flags =
-                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
                 it.finish()
             }

@@ -42,11 +42,6 @@ class RegisterActivity : AppCompatActivity() {
                    Toast.makeText(this@RegisterActivity, "Email can not be empty.", Toast.LENGTH_SHORT).show()
                }
 
-               !et_email.text.toString().trim {it <= ' '}.contains('@') ->
-               {
-                   Toast.makeText(this@RegisterActivity, "Email must be valid.", Toast.LENGTH_SHORT).show()
-               }
-
                TextUtils.isEmpty(et_username.text.toString().trim {it <= ' '}) ->
                {
                    Toast.makeText(this@RegisterActivity, "Username can not be empty.", Toast.LENGTH_SHORT).show()
@@ -95,7 +90,8 @@ class RegisterActivity : AppCompatActivity() {
                                val username = et_username.text.toString().trim { it <= ' '}
 
                                val user = hashMapOf(
-                                   "username" to "$username"
+                                   "id" to "${FirebaseAuth.getInstance().currentUser?.uid}",
+                                   "name" to "$username"
                                )
 
                                Log.d("FirebaseCode", "Creating document")
@@ -113,8 +109,7 @@ class RegisterActivity : AppCompatActivity() {
                                        FirebaseAuth.getInstance().signOut()
                                        //Moving to login - clearing past activities
                                        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                                       intent.flags =
-                                           Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                       intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                        startActivity(intent)
                                        finish()
                                    }

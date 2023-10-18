@@ -1,5 +1,6 @@
 package com.handibagofholding
 
+import android.content.ClipData.Item
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 class ItemsFragment() : Fragment() {
 
@@ -47,25 +49,28 @@ class ItemsFragment() : Fragment() {
         itemAdapter = ItemAdapter(itemArrayList, requireActivity())
         recyclerView.adapter = itemAdapter
 
+        val cId = ViewModel.character
+
+        Log.d("ItemsFragment","$cId")
+
         db = FirebaseFirestore.getInstance()
-        db.collection("character_items").document("${ViewModel.character}")
+
+
+        db.collection("items").whereEqualTo("owner","$cId")
             .addSnapshotListener { snapshot, e ->
                 if (e != null) {
-                    Log.w("FirestoreResults", "Listen failed.", e)
+                    Log.e("ItemsFragment", "Listen failed.", e)
                     return@addSnapshotListener
                 }
-                Log.w("FirestoreResults", "${snapshot?.data}")
-                if (snapshot != null && snapshot.exists()) {
-                    val result = snapshot.get("items") as List<Map<String, Object>>
-                    itemArrayList.clear()
-                    for (item in result)
-                    {
-                        itemArrayList.add(ItemMetaData("${item["id"]}", "${item["name"]}","${item["category"]}"))
+                Log.d("ItemsFragment", "${snapshot?.documents}")
+                if (snapshot != null && snapshot.documents.size > 0)
+                {
+                    snapshot.documents.forEach {
+                        it.toObject<ItemMetaData>()?.let { it1 ->
+                            itemArrayList.add(it1)
+                            itemAdapter.notifyItemInserted(itemAdapter.itemCount)
+                        }
                     }
-                    Log.d("FirestoreResults","${itemArrayList}")
-                    itemAdapter.notifyDataSetChanged()
-                } else {
-                    Log.d("FirestoreResults", "Current data: null")
                 }
             }
     }

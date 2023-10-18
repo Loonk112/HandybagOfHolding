@@ -5,11 +5,15 @@ import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class AccountActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account)
+
+        ViewModel.clearCharacterData()
+        ViewModel.account = FirebaseAuth.getInstance().currentUser!!.uid
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment

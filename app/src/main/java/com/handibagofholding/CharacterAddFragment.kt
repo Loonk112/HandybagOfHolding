@@ -44,22 +44,19 @@ class CharacterAddFragment : Fragment() {
 
                 val charName = et_characterName.text.toString().trim {it <= ' '}
 
+                val cId = db.collection("characters").document().id
+
                 val uId = ViewModel.account
                 val data = hashMapOf(
-                    "userId" to "$uId"
+                    "id" to "$cId",
+                    "name" to "$charName",
+                    "player" to "$uId"
                 )
 
-                db.collection("characters").add(data)
+                db.collection("characters").document("$cId").set(data)
                     .addOnSuccessListener {
-                        val charData = hashMapOf(
-                            "id" to "${it.id}",
-                            "name" to "$charName"
-                        )
-                        db.collection("user_characters").document("$uId").update("characters", FieldValue.arrayUnion(charData)).addOnSuccessListener {
-                            view.findNavController().navigateUp()
-                        }.addOnFailureListener { e ->
-                            Log.w("FirebaseCode", "Error writing new character", e)
-                        }
+                        Log.d("FirebaseCode", "New Character Success")
+                        view.findNavController().navigateUp()
                     }.addOnFailureListener { e ->
                         Log.w("FirebaseCode", "Error writing new character", e)
                     }

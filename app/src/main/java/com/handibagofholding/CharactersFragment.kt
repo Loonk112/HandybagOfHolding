@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 
 class CharactersFragment : Fragment() {
 
@@ -50,27 +51,26 @@ class CharactersFragment : Fragment() {
 
         val uId = ViewModel.account
 
-        Log.d("FirebaseAuth","$uId")
+        Log.d("CharactersFragment","$uId")
 
         db = FirebaseFirestore.getInstance()
-        db.collection("user_characters").document("$uId")
+
+
+        db.collection("characters").whereEqualTo("player","$uId")
             .addSnapshotListener { snapshot, e ->
             if (e != null) {
-                Log.w("FirestoreResults", "Listen failed.", e)
+                Log.e("CharactersFragment", "Listen failed.", e)
                 return@addSnapshotListener
             }
-            Log.w("FirestoreResults", "${snapshot?.data}")
-            if (snapshot != null && snapshot.exists()) {
-                val result = snapshot.get("characters") as List<Map<String, Object>>
-                characterArrayList.clear()
-                for (item in result)
-                {
-                    characterArrayList.add(CharacterMetaData("${item["id"]}", "${item["name"]}"))
+            Log.d("CharactersFragment", "${snapshot?.documents}")
+            if (snapshot != null && snapshot.documents.size > 0)
+            {
+                snapshot.documents.forEach {
+                    it.toObject<CharacterMetaData>()?.let { it1 ->
+                        characterArrayList.add(it1)
+                        characterAdapter.notifyItemInserted(characterAdapter.itemCount)
+                    }
                 }
-                Log.d("FirestoreResults","${characterArrayList}")
-                characterAdapter.notifyDataSetChanged()
-            } else {
-                Log.d("FirestoreResults", "Current data: null")
             }
         }
     }
