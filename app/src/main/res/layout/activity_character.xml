@@ -6,4 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".CharacterActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bn_primaryNavigationBar"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/character_nav_graph" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bn_primaryNavigationBar"
+        app:menu="@menu/bottom_nav_bar_character_menu"
+        android:layout_width="match_parent"
+        android:minHeight="40sp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
