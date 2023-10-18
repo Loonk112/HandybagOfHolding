@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_charactersFragment_to_characterAddFragment"
             app:destination="@id/characterAddFragment" />
-        <action
-            android:id="@+id/action_charactersFragment_to_characterMainFragment"
-            app:destination="@id/characterMainFragment" />
     </fragment>
     <fragment
         android:id="@+id/characterAddFragment"
@@ -27,9 +24,4 @@
         android:name="com.handibagofholding.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" />
-    <fragment
-        android:id="@+id/characterMainFragment"
-        android:name="com.handibagofholding.CharacterMainFragment"
-        android:label="fragment_character_main"
-        tools:layout="@layout/fragment_character_main" />
 </navigation>

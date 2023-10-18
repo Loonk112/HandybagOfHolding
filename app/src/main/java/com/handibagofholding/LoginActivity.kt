@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
         {
             Toast.makeText(this@LoginActivity, "Welcome back!", Toast.LENGTH_SHORT).show()
 
-            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            val intent = Intent(this@LoginActivity, AccountActivity::class.java)
             intent.flags =
                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
                             ).show()
 
                             //Moving to login - clearing past activities
-                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            val intent = Intent(this@LoginActivity, AccountActivity::class.java)
                             intent.flags =
                                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)

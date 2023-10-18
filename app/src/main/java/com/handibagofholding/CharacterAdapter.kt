@@ -1,5 +1,8 @@
 package com.handibagofholding
 
+import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +11,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
-class CharacterAdapter (private val characterList: ArrayList<CharacterMetaData>): RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
+class CharacterAdapter (private val characterList: ArrayList<CharacterMetaData>, private val activityContext: Context): RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -26,7 +29,9 @@ class CharacterAdapter (private val characterList: ArrayList<CharacterMetaData>)
         holder.tv_characterName.text = CharacterViewModel.name
 
         holder.myItemView.setOnClickListener {
-            Navigation.findNavController(holder.myItemView).navigate(R.id.action_charactersFragment_to_characterMainFragment)
+            val intent = Intent(activityContext, CharacterActivity::class.java)
+            intent.putExtra("id", CharacterViewModel.id)
+            activityContext.startActivity(intent)
         }
 
     }
@@ -35,7 +40,7 @@ class CharacterAdapter (private val characterList: ArrayList<CharacterMetaData>)
         return characterList.size
     }
 
-    class ViewHolder(private val itemView: View): RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(val itemView: View): RecyclerView.ViewHolder(itemView) {
         val tv_characterName = itemView.findViewById<TextView>(R.id.tv_characterName)
         val myItemView = itemView
     }

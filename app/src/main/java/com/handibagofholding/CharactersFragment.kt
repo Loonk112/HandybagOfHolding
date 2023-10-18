@@ -48,7 +48,7 @@ class CharactersFragment : Fragment() {
         characterArrayList = ArrayList<CharacterMetaData>()
 
 
-        characterAdapter = CharacterAdapter(characterArrayList)
+        characterAdapter = CharacterAdapter(characterArrayList, requireActivity())
         recyclerView.adapter = characterAdapter
 
 
