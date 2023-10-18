@@ -1,6 +1,5 @@
 package com.handibagofholding
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -12,7 +11,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -46,7 +44,7 @@ class CharacterAddFragment : Fragment() {
 
                 val charName = et_characterName.text.toString().trim {it <= ' '}
 
-                val uId = FirebaseAuth.getInstance().currentUser?.uid
+                val uId = ViewModel.account
                 val data = hashMapOf(
                     "userId" to "$uId"
                 )

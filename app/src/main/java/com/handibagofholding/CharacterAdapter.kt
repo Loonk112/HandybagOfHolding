@@ -2,13 +2,10 @@ package com.handibagofholding
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
 class CharacterAdapter (private val characterList: ArrayList<CharacterMetaData>, private val activityContext: Context): RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
@@ -24,13 +21,13 @@ class CharacterAdapter (private val characterList: ArrayList<CharacterMetaData>,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val CharacterViewModel = characterList[position]
+        val characterViewModel = characterList[position]
 
-        holder.tv_characterName.text = CharacterViewModel.name
+        holder.tv_characterName.text = characterViewModel.name
 
         holder.myItemView.setOnClickListener {
             val intent = Intent(activityContext, CharacterActivity::class.java)
-            intent.putExtra("id", CharacterViewModel.id)
+            ViewModel.character = characterViewModel.id
             activityContext.startActivity(intent)
         }
 

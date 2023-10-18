@@ -69,6 +69,9 @@ class LoginActivity : AppCompatActivity() {
                             ).show()
 
                             //Moving to login - clearing past activities
+
+                            ViewModel.account = FirebaseAuth.getInstance().currentUser?.uid.toString()
+
                             val intent = Intent(this@LoginActivity, AccountActivity::class.java)
                             intent.flags =
                                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

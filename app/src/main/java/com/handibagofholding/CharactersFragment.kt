@@ -10,10 +10,7 @@ import android.widget.ImageButton
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.getField
-import kotlin.reflect.typeOf
 
 class CharactersFragment : Fragment() {
 
@@ -51,11 +48,12 @@ class CharactersFragment : Fragment() {
         characterAdapter = CharacterAdapter(characterArrayList, requireActivity())
         recyclerView.adapter = characterAdapter
 
+        val uId = ViewModel.account
 
-        Log.d("FirebaseAuth","${FirebaseAuth.getInstance().currentUser?.uid}")
+        Log.d("FirebaseAuth","$uId")
 
         db = FirebaseFirestore.getInstance()
-        db.collection("user_characters").document("${FirebaseAuth.getInstance().currentUser?.uid}")
+        db.collection("user_characters").document("$uId")
             .addSnapshotListener { snapshot, e ->
             if (e != null) {
                 Log.w("FirestoreResults", "Listen failed.", e)

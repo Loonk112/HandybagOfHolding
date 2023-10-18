@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_characters"
+        android:id="@+id/rv_items"
         tools:listitem="@layout/item_card_layout"
         android:paddingTop="5dp"
         android:layout_width="match_parent"
