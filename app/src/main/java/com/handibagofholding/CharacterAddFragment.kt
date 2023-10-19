@@ -40,11 +40,9 @@ class CharacterAddFragment : Fragment() {
                 Toast.makeText(requireActivity(), "Character name can not be empty.", Toast.LENGTH_SHORT).show()
             }
             else {
-                val db = Firebase.firestore
-
                 val charName = et_characterName.text.toString().trim {it <= ' '}
 
-                val cId = db.collection("characters").document().id
+                val cId = ViewModel.db.collection("characters").document().id
 
                 val uId = ViewModel.account
                 val data = hashMapOf(
@@ -53,7 +51,7 @@ class CharacterAddFragment : Fragment() {
                     "player" to "$uId"
                 )
 
-                db.collection("characters").document("$cId").set(data)
+                ViewModel.db.collection("characters").document("$cId").set(data)
                     .addOnSuccessListener {
                         Log.d("FirebaseCode", "New Character Success")
                         view.findNavController().navigateUp()

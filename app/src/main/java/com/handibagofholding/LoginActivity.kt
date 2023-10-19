@@ -18,7 +18,7 @@ class LoginActivity : AppCompatActivity() {
         //Clearing VM data
         ViewModel.clearAccountData()
 
-        if (FirebaseAuth.getInstance().currentUser != null)
+        if (ViewModel.auth.currentUser != null)
         {
             Toast.makeText(this@LoginActivity, "Welcome back!", Toast.LENGTH_SHORT).show()
 
@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
                     val email: String = et_email.text.toString().trim { it <= ' '}
                     val password: String = et_password.text.toString().trim { it <= ' '}
 
-                    FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                    ViewModel.auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                         if (task.isSuccessful)
                         {
                             Toast.makeText(
@@ -71,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             ).show()
 
-                            ViewModel.account = FirebaseAuth.getInstance().currentUser?.uid.toString()
+                            ViewModel.account = ViewModel.auth.currentUser?.uid.toString()
 
                             val intent = Intent(this@LoginActivity, AccountActivity::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

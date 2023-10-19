@@ -18,7 +18,6 @@ class CharactersFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var characterArrayList: ArrayList<CharacterMetaData>
     private lateinit var characterAdapter: CharacterAdapter
-    private lateinit var db : FirebaseFirestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -53,10 +52,7 @@ class CharactersFragment : Fragment() {
 
         Log.d("CharactersFragment","$uId")
 
-        db = FirebaseFirestore.getInstance()
-
-
-        db.collection("characters").whereEqualTo("player","$uId")
+        ViewModel.db.collection("characters").whereEqualTo("player","$uId")
             .addSnapshotListener { snapshot, e ->
             if (e != null) {
                 Log.e("CharactersFragment", "Listen failed.", e)
@@ -65,12 +61,13 @@ class CharactersFragment : Fragment() {
             Log.d("CharactersFragment", "${snapshot?.documents}")
             if (snapshot != null && snapshot.documents.size > 0)
             {
+                characterArrayList.clear()
                 snapshot.documents.forEach {
                     it.toObject<CharacterMetaData>()?.let { it1 ->
                         characterArrayList.add(it1)
-                        characterAdapter.notifyItemInserted(characterAdapter.itemCount)
                     }
                 }
+                characterAdapter.notifyDataSetChanged()
             }
         }
     }

@@ -77,7 +77,7 @@ class RegisterActivity : AppCompatActivity() {
                    val email: String = et_email.text.toString().trim { it <= ' '}
                    val password: String = et_password1.text.toString().trim { it <= ' '}
 
-                   FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                   ViewModel.auth.createUserWithEmailAndPassword(email, password)
                        .addOnCompleteListener { task ->
                            //Success check
                            if (task.isSuccessful) {
@@ -96,9 +96,7 @@ class RegisterActivity : AppCompatActivity() {
 
                                Log.d("FirebaseCode", "Creating document")
 
-                               val db = Firebase.firestore
-
-                               db.collection("users").document("${FirebaseAuth.getInstance().currentUser?.uid}")
+                               ViewModel.db.collection("users").document("${ViewModel.auth.currentUser?.uid}")
                                    .set(user)
                                    .addOnSuccessListener {
                                        Log.d("FirebaseCode", "DocumentSnapshot successfully written!")
@@ -106,7 +104,7 @@ class RegisterActivity : AppCompatActivity() {
                                    .addOnFailureListener { e ->
                                        Log.w("FirebaseCode", "Error writing document", e)
                                    }.addOnCompleteListener {
-                                       FirebaseAuth.getInstance().signOut()
+                                       ViewModel.auth.signOut()
                                        //Moving to login - clearing past activities
                                        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

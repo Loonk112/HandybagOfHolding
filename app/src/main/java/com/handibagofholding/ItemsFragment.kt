@@ -10,15 +10,18 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.TabView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
 
 class ItemsFragment() : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var itemArrayList: ArrayList<ItemMetaData>
+    private var itemArrayList: ArrayList<ItemMetaData> = ArrayList<ItemMetaData>()
+    private var displayArrayList: ArrayList<ItemMetaData> = ArrayList<ItemMetaData>()
     private lateinit var itemAdapter: ItemAdapter
-    private lateinit var db : FirebaseFirestore
+    private var filter: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -33,6 +36,28 @@ class ItemsFragment() : Fragment() {
         recyclerView = view.findViewById(R.id.rv_items)
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
 
+        val tabLayout = view.findViewById<TabLayout>(R.id.tl_itemTabLayout)
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+
+                if (tab != null) {
+                    if (tab.text == "all") {
+                        filter = null
+                    }
+                    else filter = tab.text as String?
+                }
+
+                updateRV()
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+
+            }
+            override fun onTabReselected(tab: TabLayout.Tab) {
+
+            }
+        })
+
         view.findViewById<ImageButton>(R.id.ib_newItem).setOnClickListener {
             // TODO: ADD!
         }
@@ -44,35 +69,48 @@ class ItemsFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         itemArrayList = ArrayList<ItemMetaData>()
+        displayArrayList = itemArrayList.clone() as ArrayList<ItemMetaData>
 
-
-        itemAdapter = ItemAdapter(itemArrayList, requireActivity())
+        itemAdapter = ItemAdapter(displayArrayList, requireActivity())
         recyclerView.adapter = itemAdapter
 
         val cId = ViewModel.character
 
         Log.d("ItemsFragment","$cId")
 
-        db = FirebaseFirestore.getInstance()
-
-
-        db.collection("items").whereEqualTo("owner","$cId")
-            .addSnapshotListener { snapshot, e ->
-                if (e != null) {
-                    Log.e("ItemsFragment", "Listen failed.", e)
-                    return@addSnapshotListener
-                }
-                Log.d("ItemsFragment", "${snapshot?.documents}")
-                if (snapshot != null && snapshot.documents.size > 0)
-                {
-                    snapshot.documents.forEach {
-                        it.toObject<ItemMetaData>()?.let { it1 ->
-                            itemArrayList.add(it1)
-                            itemAdapter.notifyItemInserted(itemAdapter.itemCount)
-                        }
+        ViewModel.db.collection("items").whereEqualTo("owner","$cId").addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.e("ItemsFragment", "Listen failed.", e)
+                return@addSnapshotListener
+            }
+            itemArrayList.clear()
+            Log.d("ItemsFragment", "${snapshot?.documents}")
+            if (snapshot != null && snapshot.documents.size > 0)
+            {
+                snapshot.documents.forEach {
+                    it.toObject<ItemMetaData>()?.let { it1 ->
+                        itemArrayList.add(it1)
                     }
                 }
             }
+            updateRV()
+        }
+    }
+
+    private fun updateRV() {
+        Log.d("updateRV", "Filter: $filter")
+        displayArrayList.clear()
+        if (filter != null) {
+            Log.d(
+                "updateRV",
+                "Filtered list: ${itemArrayList.filter { it -> it.category == filter }}"
+            )
+            displayArrayList.addAll(itemArrayList.filter { it -> it.category == filter } as ArrayList<ItemMetaData>)
+        }
+        else {
+            displayArrayList.addAll(itemArrayList.clone() as ArrayList<ItemMetaData>)
+        }
+        itemAdapter.notifyDataSetChanged()
     }
 
 }

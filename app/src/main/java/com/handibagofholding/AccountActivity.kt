@@ -13,7 +13,7 @@ class AccountActivity : AppCompatActivity() {
         setContentView(R.layout.activity_account)
 
         ViewModel.clearCharacterData()
-        ViewModel.account = FirebaseAuth.getInstance().currentUser!!.uid
+        ViewModel.account = ViewModel.auth.currentUser!!.uid
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment

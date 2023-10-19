@@ -8,7 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ItemAdapter (private val itemList: ArrayList<ItemMetaData>, private val activityContext: Context): RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+class ItemAdapter (val itemList: ArrayList<ItemMetaData>, private val activityContext: Context): RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -49,4 +50,5 @@ class ItemAdapter (private val itemList: ArrayList<ItemMetaData>, private val ac
         val tv_itemCategory = itemView.findViewById<TextView>(R.id.tv_itemCategory)
         val myItemView = itemView
     }
+
 }
