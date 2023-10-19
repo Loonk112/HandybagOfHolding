@@ -62,6 +62,10 @@ class ItemsFragment() : Fragment() {
             // TODO: ADD!
         }
 
+        view.findViewById<ImageButton>(R.id.ib_return).setOnClickListener {
+            requireActivity().finish()
+        }
+
         return view
     }
 

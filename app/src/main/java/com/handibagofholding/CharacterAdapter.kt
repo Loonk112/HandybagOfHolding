@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -39,7 +40,10 @@ class CharacterAdapter (private val characterList: ArrayList<CharacterMetaData>,
                     Log.d("AlertDialog", "YES")
                     ViewModel.db.collection("characters").document("${characterViewModel.id}")
                         .delete()
-                        .addOnSuccessListener { Log.d("Firebase", "Character was deleted") }
+                        .addOnSuccessListener {
+                            Log.d("Firebase", "Character was deleted")
+                            Toast.makeText(activityContext, "${characterViewModel.name} was deleted.", Toast.LENGTH_SHORT).show()
+                        }
                         .addOnFailureListener { e -> Log.w("Firebase", "Error deleting document", e) }
                 }
             }
