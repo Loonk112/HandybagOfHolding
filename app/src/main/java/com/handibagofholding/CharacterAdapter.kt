@@ -34,7 +34,7 @@ class CharacterAdapter (private val characterList: ArrayList<CharacterMetaData>,
         }
 
         holder.myItemView.setOnLongClickListener {
-            AlertDialog(activityContext).show("You are about to delete a charcter", "This is irreversible. Are you sure?"){
+            AlertDialog(activityContext).show("You are about to delete ${characterViewModel.name}.\nIt is irreversible.\nAre you sure?"){
                 if (it == AlertDialog.ResponseType.YES) {
                     Log.d("AlertDialog", "YES")
                     ViewModel.db.collection("characters").document("${characterViewModel.id}")

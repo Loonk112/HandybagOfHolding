@@ -2,6 +2,8 @@ package com.handibagofholding
 
 import android.content.Context
 import android.app.AlertDialog
+import android.view.LayoutInflater
+import android.widget.TextView
 
 class AlertDialog(context: Context) : AlertDialog.Builder(context) {
 
@@ -11,23 +13,33 @@ class AlertDialog(context: Context) : AlertDialog.Builder(context) {
         YES, NO
     }
 
-    fun show(title: String, message: String, listener: (r : ResponseType) -> Unit) {
+    fun show(message: String, listener: (r : ResponseType) -> Unit) {
 
         val builder = AlertDialog.Builder(context)
-        builder.setTitle(title)
-        builder.setMessage(message)
-        builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+        val view = LayoutInflater.from(context).inflate(R.layout.alert_dialog, null)
+
+        var alertDialog: AlertDialog = builder.create()
+
+        view.findViewById<TextView>(R.id.tv_message).text = message
+
+        view.findViewById<TextView>(R.id.tv_confirm).setOnClickListener() {
+            onResponse(ResponseType.YES)
+            alertDialog.dismiss()
+        }
+
+        view.findViewById<TextView>(R.id.tv_cancel).setOnClickListener() {
+            onResponse(ResponseType.NO)
+            alertDialog.dismiss()
+        }
+
+
+
+        builder.setView(view)
+
         onResponse = listener
 
-        builder.setPositiveButton("Yes") { _, _ ->
-            onResponse(ResponseType.YES)
-        }
-
-        builder.setNegativeButton("No") { _, _ ->
-            onResponse(ResponseType.NO)
-        }
-
-        val alertDialog: AlertDialog = builder.create()
+        alertDialog = builder.create()
 
         alertDialog.setCancelable(true)
         alertDialog.show()
