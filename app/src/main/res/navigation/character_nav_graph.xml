@@ -9,10 +9,19 @@
         android:id="@+id/itemsFragment"
         android:name="com.handibagofholding.ItemsFragment"
         android:label="fragment_items"
-        tools:layout="@layout/fragment_items" />
+        tools:layout="@layout/fragment_items" >
+        <action
+            android:id="@+id/action_itemsFragment_to_itemAddFragment"
+            app:destination="@id/itemAddFragment" />
+    </fragment>
     <fragment
         android:id="@+id/characterDetailsFragment"
         android:name="com.handibagofholding.CharacterDetailsFragment"
         android:label="fragment_character_details"
         tools:layout="@layout/fragment_character_details" />
+    <fragment
+        android:id="@+id/itemAddFragment"
+        android:name="com.handibagofholding.ItemAddFragment"
+        android:label="fragment_item_add"
+        tools:layout="@layout/fragment_item_add" />
 </navigation>

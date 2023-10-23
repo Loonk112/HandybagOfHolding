@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ItemAddFragment">
+
+    <LinearLayout
+        android:id="@+id/ll_topBar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="New Item"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:layout_marginVertical="10dp"
+            android:layout_width="0px"
+            android:layout_weight="8"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        app:layout_constraintTop_toBottomOf="@id/ll_topBar"
+        app:layout_constraintBottom_toTopOf="@id/ll_bottomBar">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Basic !-->
+
+            <EditText
+                android:id="@+id/et_itemName"
+                android:hint="Item name"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:text="Category"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:id="@+id/tv_categoryTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:id="@+id/spnr_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:spinnerMode="dropdown"/>
+
+            <!-- Weapons !-->
+
+
+            <TextView
+                android:text="Proficiency Group"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:id="@+id/tv_weapons_proficiencyGroupTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <RadioGroup
+                android:id="@+id/rg_weapons_proficiencyGroup"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:checkedButton="@id/rb_weapons_simple">
+                <RadioButton
+                    android:id="@+id/rb_weapons_simple"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:text="Simple"/>
+                <RadioButton
+                    android:id="@+id/rb_weapons_martial"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:text="Martial"/>
+            </RadioGroup>
+
+            <TextView
+                android:text="Weapon Range"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:id="@+id/tv_weapons_rangeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <RadioGroup
+                android:id="@+id/rg_weapons_range"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:checkedButton="@id/rb_weapons_melee">
+                <RadioButton
+                    android:id="@+id/rb_weapons_melee"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:text="Melee"/>
+                <RadioButton
+                    android:id="@+id/rb_weapons_ranged"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:text="Ranged"/>
+            </RadioGroup>
+
+            <TextView
+                android:text="Weapon Proficiency"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:id="@+id/tv_weapons_proficiencyTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:id="@+id/spnr_weapons_proficiency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:spinnerMode="dialog"/>
+
+            <TextView
+                android:text="Weapon Damage"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:id="@+id/tv_weapons_damageTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_weapons_damageDisplay"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="4"/>
+
+            <LinearLayout
+                android:id="@+id/ll_weapons_damageAddLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+                <Spinner
+                    android:id="@+id/spnr_weapons_damageType"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="10dp"
+                    android:spinnerMode="dialog"/>
+                <EditText
+                    android:id="@+id/et_weapons_damageCount"
+                    android:hint="Count"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:inputType="number"/>
+                <Spinner
+                    android:id="@+id/spnr_weapons_damageDice"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="10dp"
+                    android:spinnerMode="dialog"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/b_weapons_addDamage"
+                android:text="Add damage"
+                android:textSize="20sp"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!-- Armour !-->
+
+            <EditText
+                android:id="@+id/armour_et_ac"
+                android:hint="AC"
+                android:textSize="20sp"
+                android:inputType="number"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                android:text="Armour Proficiency"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:id="@+id/armour_tv_atmourProfTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Spinner
+                android:id="@+id/armour_spnr_armourProf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:spinnerMode="dialog"/>
+
+            <!-- Consumables !-->
+
+            <!-- Other !-->
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_bottomBar"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <Button
+            android:id="@+id/b_newItemCancel"
+            android:text="Cancel"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/b_newItemConfirm"
+            android:text="Confirm"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

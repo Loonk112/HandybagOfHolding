@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
@@ -51,15 +52,13 @@ class ItemsFragment() : Fragment() {
                 updateRV()
             }
             override fun onTabUnselected(tab: TabLayout.Tab) {
-
             }
             override fun onTabReselected(tab: TabLayout.Tab) {
-
             }
         })
 
         view.findViewById<ImageButton>(R.id.ib_newItem).setOnClickListener {
-            // TODO: ADD!
+            view.findNavController().navigate(R.id.action_itemsFragment_to_itemAddFragment)
         }
 
         view.findViewById<ImageButton>(R.id.ib_return).setOnClickListener {

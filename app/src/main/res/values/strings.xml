@@ -1,6 +1,91 @@
 <resources>
-    <string name="app_name">Handibag Of Holding</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Handybag Of Holding</string>
     <string name="characters">Characters</string>
+
+    <string-array name="sa_itemCategories">
+        <item>Weapons</item>
+        <item>Armour</item>
+        <item>Consumable</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="sa_armourProficiencies">
+        <item>None</item>
+        <item>Light</item>
+        <item>Medium</item>
+        <item>Heavy</item>
+    </string-array>
+    <string-array name="sa_weaponSimpleProficiencyMelee">
+        <item>Unarmed</item>
+        <item>Club</item>
+        <item>Dagger</item>
+        <item>Greatclub</item>
+        <item>Handaxe</item>
+        <item>Javelin</item>
+        <item>Light Hammer</item>
+        <item>Mace</item>
+        <item>Quarterstaff</item>
+        <item>Sickle</item>
+        <item>Spear</item>
+    </string-array>
+    <string-array name="sa_weaponSimpleProficiencyRanged">
+        <item>Dart</item>
+        <item>Light Crossbow</item>
+        <item>Shortbow</item>
+        <item>Sling</item>
+    </string-array>
+    <string-array name="sa_weaponMartialProficiencyMelee">
+        <item>Battleaxe</item>
+        <item>Dwarven Urgosh</item>
+        <item>Elven Crescent Blade</item>
+        <item>Flail</item>
+        <item>Glave</item>
+        <item>Greataxe</item>
+        <item>Greatsword</item>
+        <item>Halberd</item>
+        <item>Lance</item>
+        <item>Longsword</item>
+        <item>Maul</item>
+        <item>Morningstar</item>
+        <item>Pike</item>
+        <item>Rapier</item>
+        <item>Scimtar</item>
+        <item>Shortsword</item>
+        <item>Spiked Chain</item>
+        <item>Trident</item>
+        <item>War Pick</item>
+        <item>Warhammer</item>
+        <item>Whip</item>
+        <item>War Scythe</item>
+    </string-array>
+    <string-array name="sa_weaponMartialProficiencyRanged">
+        <item>Blowgun</item>
+        <item>Hand Crossbow</item>
+        <item>Heavy Crossbow</item>
+        <item>Great Bow</item>
+        <item>Longbow</item>
+        <item>Net</item>
+    </string-array>
+    <string-array name="sa_damageTypes">
+        <item>Bludgeoning</item>
+        <item>Piercing</item>
+        <item>Slashing</item>
+        <item>Acid</item>
+        <item>Cold</item>
+        <item>Fire</item>
+        <item>Force</item>
+        <item>Lightning</item>
+        <item>Necrotic</item>
+        <item>Poison</item>
+        <item>Psychic</item>
+        <item>Radiant</item>
+        <item>Thunder</item>
+    </string-array>
+    <string-array name="sa_damageDice">
+        <item>d4</item>
+        <item>d6</item>
+        <item>d8</item>
+        <item>d10</item>
+        <item>d12</item>
+        <item>d20</item>
+    </string-array>
 </resources>

@@ -59,16 +59,16 @@ class CharactersFragment : Fragment() {
                 return@addSnapshotListener
             }
             Log.d("CharactersFragment", "${snapshot?.documents}")
+            characterArrayList.clear()
             if (snapshot != null && snapshot.documents.size > 0)
             {
-                characterArrayList.clear()
                 snapshot.documents.forEach {
                     it.toObject<CharacterMetaData>()?.let { it1 ->
                         characterArrayList.add(it1)
                     }
                 }
-                characterAdapter.notifyDataSetChanged()
             }
+            characterAdapter.notifyDataSetChanged()
         }
     }
 }

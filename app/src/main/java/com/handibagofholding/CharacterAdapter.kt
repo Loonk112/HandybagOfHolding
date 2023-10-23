@@ -43,6 +43,7 @@ class CharacterAdapter (private val characterList: ArrayList<CharacterMetaData>,
                         .addOnSuccessListener {
                             Log.d("Firebase", "Character was deleted")
                             Toast.makeText(activityContext, "${characterViewModel.name} was deleted.", Toast.LENGTH_SHORT).show()
+
                         }
                         .addOnFailureListener { e -> Log.w("Firebase", "Error deleting document", e) }
                 }
