@@ -145,6 +145,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_weapons_damageDisplay"
+                tools:listitem="@layout/item_damage_layout"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -160,7 +161,7 @@
                     android:id="@+id/spnr_weapons_damageType"
                     android:layout_width="0px"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:layout_marginHorizontal="10dp"
                     android:spinnerMode="dialog"/>
                 <EditText
@@ -174,7 +175,7 @@
                     android:id="@+id/spnr_weapons_damageDice"
                     android:layout_width="0px"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:layout_marginHorizontal="10dp"
                     android:spinnerMode="dialog"/>
             </LinearLayout>
@@ -190,7 +191,7 @@
             <!-- Armour !-->
 
             <EditText
-                android:id="@+id/armour_et_ac"
+                android:id="@+id/et_armour_ac"
                 android:hint="AC"
                 android:textSize="20sp"
                 android:inputType="number"
@@ -203,12 +204,12 @@
                 android:text="Armour Proficiency"
                 android:gravity="center"
                 android:textSize="20sp"
-                android:id="@+id/armour_tv_atmourProfTitle"
+                android:id="@+id/tv_armour_proficiencyTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <Spinner
-                android:id="@+id/armour_spnr_armourProf"
+                android:id="@+id/spnr_armour_proficiency"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
