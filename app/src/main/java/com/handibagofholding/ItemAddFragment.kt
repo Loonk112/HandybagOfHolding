@@ -218,10 +218,21 @@ class ItemAddFragment : Fragment() {
                                 "category" to "$category"
                             )
 
+
+                            val weapon_metaData = hashMapOf(
+                                "id" to "$iId",
+                                "group" to "$weaponProficiency",
+                                "range" to "$weaponRange",
+                                "proficiency" to "${spnr_weapons_proficiency.selectedItem.toString()}",
+                                "damage" to damageArrayList
+
+                            )
+
                             db.runTransaction { transaction ->
                                 transaction.set(db.collection("items").document(iId), metaData)
 
-                                //TODO
+                                transaction.set(db.collection("weapons").document(iId), weapon_metaData)
+
 
                             }.addOnSuccessListener {
                                 view.findNavController().navigateUp()

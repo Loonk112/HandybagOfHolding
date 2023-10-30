@@ -45,13 +45,18 @@ class ItemAdapter (val itemList: ArrayList<ItemMetaData>, private val activityCo
             AlertDialog(activityContext).show("You are about to delete ${itemViewModel.name}.\nIt is irreversible.\nAre you sure?"){
                 if (it == AlertDialog.ResponseType.YES) {
                     Log.d("AlertDialog", "YES")
-                    ViewModel.db.collection("items").document("${itemViewModel.id}")
-                        .delete()
-                        .addOnSuccessListener {
-                            Log.d("Firebase", "Item was deleted")
-                            Toast.makeText(activityContext, "${itemViewModel.name} was deleted.", Toast.LENGTH_SHORT).show()
-                        }
-                        .addOnFailureListener { e -> Log.w("Firebase", "Error deleting document", e) }
+
+                    ViewModel.db.runTransaction { transaction ->
+
+                        transaction.delete(ViewModel.db.collection("items").document("${itemViewModel.id}"))
+                        transaction.delete(ViewModel.db.collection(itemViewModel.category).document("${itemViewModel.id}"))
+
+                    }.addOnSuccessListener {
+                        Log.d("Firebase", "Item was deleted")
+                        Toast.makeText(activityContext, "${itemViewModel.name} was deleted.", Toast.LENGTH_SHORT).show()
+                    }.addOnFailureListener { e -> Log.w("Firebase", "Error deleting document", e) }
+
+
                 }
             }
             true
