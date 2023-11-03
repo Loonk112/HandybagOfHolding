@@ -15,7 +15,7 @@ class ItemDamageAdapter (private val damageList: ArrayList<ItemDamageData>, priv
         parent: ViewGroup,
         viewType: Int
     ): ItemDamageAdapter.ViewHolder {
-        val view = LayoutInflater.from(parent.context) //TODO
+        val view = LayoutInflater.from(parent.context) //TODO: View
             .inflate(R.layout.item_damage_layout, parent, false)
 
         return ViewHolder(view)

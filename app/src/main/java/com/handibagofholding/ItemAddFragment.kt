@@ -20,6 +20,7 @@ import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.internal.EdgeToEdgeUtils
 
 class ItemAddFragment : Fragment() {
 
@@ -44,6 +45,9 @@ class ItemAddFragment : Fragment() {
 
     lateinit var et_armour_ac: EditText
     lateinit var spnr_armour_proficiency: Spinner
+    lateinit var spnr_armour_slot: Spinner
+
+    lateinit var et_consumables_count: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,6 +122,7 @@ class ItemAddFragment : Fragment() {
         //Armour
         et_armour_ac = view.findViewById<EditText>(R.id.et_armour_ac)
         spnr_armour_proficiency = view.findViewById<Spinner>(R.id.spnr_armour_proficiency)
+        spnr_armour_slot = view.findViewById<Spinner>(R.id.spnr_armour_slot)
 
         if (spnr_armour_proficiency != null) {
             val adapter = ArrayAdapter( //TODO: Spinner item
@@ -127,6 +132,19 @@ class ItemAddFragment : Fragment() {
             spnr_armour_proficiency.adapter = adapter
         }
         else Log.e("ItemAddFragment", "Can't find view!")
+
+        if (spnr_armour_slot != null) {
+            val adapter = ArrayAdapter( //TODO: Spinner item
+                requireContext(),
+                android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_armourSlot)
+            )
+            spnr_armour_slot.adapter = adapter
+        }
+        else Log.e("ItemAddFragment", "Can't find view!")
+
+        //Consumables
+
+        et_consumables_count = view.findViewById<EditText>(R.id.et_consumables_count)
 
         return view
     }
@@ -199,6 +217,7 @@ class ItemAddFragment : Fragment() {
             {
                 when (cat)
                 {
+
                     0 -> {
                         Log.d("ItemAddFragment", "Selected prof: ${spnr_weapons_proficiency.selectedItem.toString()}")
 
@@ -245,13 +264,134 @@ class ItemAddFragment : Fragment() {
 
                     }
                     1 -> {
-//TODO
+                        Log.d("ItemAddFragment", "Selected prof: ${spnr_weapons_proficiency.selectedItem.toString()}")
+
+                        val iId = ViewModel.db.collection("items").document().id
+
+                        if (iId != null) {
+                            val db = ViewModel.db
+
+                            val itemName = et_itemName.text.toString().trim()
+                            val oId = ViewModel.character
+                            val category = spnr_category.selectedItem.toString().lowercase()
+
+                            val metaData = hashMapOf(
+                                "id" to "$iId",
+                                "name" to "$itemName",
+                                "owner" to "$oId",
+                                "category" to "$category"
+                            )
+
+                            var ac = 0
+                            if (et_armour_ac.text.isNotBlank()) {
+                                ac = et_armour_ac.text.toString().toInt()
+                            }
+                            else {
+                                Toast.makeText(activity, "AC defaulted to 0", Toast.LENGTH_SHORT).show()
+                            }
+
+
+                            val armour_metaData = hashMapOf(
+                                "id" to "$iId",
+                                "proficiency" to "${spnr_armour_proficiency.selectedItem.toString()}",
+                                "slot" to "${spnr_armour_slot.selectedItem.toString()}",
+                                "ac" to "$ac"
+
+                            )
+
+                            db.runTransaction { transaction ->
+                                transaction.set(db.collection("items").document(iId), metaData)
+
+                                transaction.set(db.collection("armour").document(iId), armour_metaData)
+
+
+                            }.addOnSuccessListener {
+                                view.findNavController().navigateUp()
+                                Toast.makeText(context, "Item Has been added to character.", Toast.LENGTH_SHORT).show()
+                            }.addOnFailureListener {e ->
+                                Toast.makeText(context, "$e", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     }
                     2 -> {
-//TODO
+                        Log.d("ItemAddFragment", "Selected prof: ${spnr_weapons_proficiency.selectedItem.toString()}")
+
+                        val iId = ViewModel.db.collection("items").document().id
+
+                        if (iId != null) {
+                            val db = ViewModel.db
+
+                            val itemName = et_itemName.text.toString().trim()
+                            val oId = ViewModel.character
+                            val category = spnr_category.selectedItem.toString().lowercase()
+
+                            val metaData = hashMapOf(
+                                "id" to "$iId",
+                                "name" to "$itemName",
+                                "owner" to "$oId",
+                                "category" to "$category"
+                            )
+
+                            var count = 1
+                            if (et_consumables_count.text.isNotBlank()) {
+                                count = et_consumables_count.text.toString().toInt()
+                            }
+                            else {
+                                Toast.makeText(activity, "Count defaulted to 1", Toast.LENGTH_SHORT).show()
+                            }
+
+
+                            val consumables_metaData = hashMapOf(
+                                "id" to "$iId",
+                                "count" to "$count"
+
+                            )
+
+                            db.runTransaction { transaction ->
+                                transaction.set(db.collection("items").document(iId), metaData)
+
+                                transaction.set(db.collection("consumables").document(iId), consumables_metaData)
+
+
+                            }.addOnSuccessListener {
+                                view.findNavController().navigateUp()
+                                Toast.makeText(context, "Item Has been added to character.", Toast.LENGTH_SHORT).show()
+                            }.addOnFailureListener {e ->
+                                Toast.makeText(context, "$e", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
                     }
                     3 -> {
-//TODO
+                        Log.d("ItemAddFragment", "Selected prof: ${spnr_weapons_proficiency.selectedItem.toString()}")
+
+                        val iId = ViewModel.db.collection("items").document().id
+
+                        if (iId != null) {
+                            val db = ViewModel.db
+
+                            val itemName = et_itemName.text.toString().trim()
+                            val oId = ViewModel.character
+                            val category = spnr_category.selectedItem.toString().lowercase()
+
+                            val metaData = hashMapOf(
+                                "id" to "$iId",
+                                "name" to "$itemName",
+                                "owner" to "$oId",
+                                "category" to "$category"
+                            )
+
+                            db.runTransaction { transaction ->
+                                transaction.set(db.collection("items").document(iId), metaData)
+
+                            }.addOnSuccessListener {
+                                view.findNavController().navigateUp()
+                                Toast.makeText(context, "Item Has been added to character.", Toast.LENGTH_SHORT).show()
+                            }.addOnFailureListener {e ->
+                                Toast.makeText(context, "$e", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
                     }
                 }
             }
@@ -305,13 +445,12 @@ class ItemAddFragment : Fragment() {
             1 -> { //Armour
                 Log.d("ItemAddFragment", "<hide>\tHiding armour...")
                 et_armour_ac.visibility = View.GONE
-                spnr_armour_proficiency.visibility = View.GONE
-                myView?.findViewById<TextView>(R.id.tv_armour_proficiencyTitle)!!.visibility = View.GONE
+                myView?.findViewById<LinearLayout>(R.id.ll_armour_linearContainer)!!.visibility = View.GONE
 
             }
             2 -> { //Consumable
                 Log.d("ItemAddFragment", "<hide>\tHiding consumable...")
-
+                myView?.findViewById<EditText>(R.id.et_consumables_count)!!.visibility = View.GONE
             }
             3 -> { //Other
                 Log.d("ItemAddFragment", "<hide>\tHiding other...")
@@ -342,12 +481,12 @@ class ItemAddFragment : Fragment() {
             1 -> { //Armour
                 Log.d("ItemAddFragment", "<hide>\tHiding armour...")
                 et_armour_ac.visibility = View.VISIBLE
-                spnr_armour_proficiency.visibility = View.VISIBLE
-                myView?.findViewById<TextView>(R.id.tv_armour_proficiencyTitle)!!.visibility = View.VISIBLE
+                myView?.findViewById<LinearLayout>(R.id.ll_armour_linearContainer)!!.visibility = View.VISIBLE
 
             }
             2 -> { //Consumable
                 Log.d("ItemAddFragment", "<hide>\tHiding consumable...")
+                myView?.findViewById<EditText>(R.id.et_consumables_count)!!.visibility = View.VISIBLE
 
             }
             3 -> { //Other

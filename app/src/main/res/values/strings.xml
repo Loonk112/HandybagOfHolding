@@ -5,14 +5,25 @@
     <string-array name="sa_itemCategories">
         <item>Weapons</item>
         <item>Armour</item>
-        <item>Consumable</item>
+        <item>Consumables</item>
         <item>Other</item>
     </string-array>
     <string-array name="sa_armourProficiencies">
         <item>None</item>
+        <item>Shield</item>
         <item>Light</item>
         <item>Medium</item>
         <item>Heavy</item>
+    </string-array>
+    <string-array name="sa_armourSlot">
+        <item>Hands</item>
+        <item>Helmet</item>
+        <item>Cloak</item>
+        <item>Torso</item>
+        <item>Boots</item>
+        <item>Necklace</item>
+        <item>Ring</item>
+        <item>Other</item>
     </string-array>
     <string-array name="sa_weaponSimpleProficiencyMelee">
         <item>Unarmed</item>

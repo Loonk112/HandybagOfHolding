@@ -1,3 +1,3 @@
 package com.handibagofholding
 
-data class WeaponData(val proficiencyGroup: String = "", val range: String = "", val proficiency: String = "", val damage: ArrayList<ItemDamageData>? = null)
+data class WeaponData(val id: String = "", val group: String = "", val range: String = "", val proficiency: String = "", val damage: ArrayList<ItemDamageData>? = null)

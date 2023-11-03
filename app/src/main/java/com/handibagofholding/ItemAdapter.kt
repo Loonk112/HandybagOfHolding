@@ -31,7 +31,8 @@ class ItemAdapter (val itemList: ArrayList<ItemMetaData>, private val activityCo
         when(itemViewModel.category)
         {
             "weapons" -> holder.tv_itemCategory.text = "Weapons"
-            "armours" -> holder.tv_itemCategory.text = "Armour"
+            "armour" -> holder.tv_itemCategory.text = "Armour"
+            "consumables" -> holder.tv_itemCategory.text = "Consumables"
             else -> holder.tv_itemCategory.text = "Other"
         }
 
