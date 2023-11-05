@@ -21,6 +21,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.internal.EdgeToEdgeUtils
+import java.util.HashMap
 
 class ItemAddFragment : Fragment() {
 
@@ -215,73 +216,38 @@ class ItemAddFragment : Fragment() {
             }
             else
             {
-                when (cat)
-                {
 
-                    0 -> {
-                        Log.d("ItemAddFragment", "Selected prof: ${spnr_weapons_proficiency.selectedItem.toString()}")
+                Log.d("ItemAddFragment", "Selected cat: ${spnr_category.selectedItem.toString()}")
 
-                        val iId = ViewModel.db.collection("items").document().id
+                val iId = ViewModel.db.collection("items").document().id
 
-                        if (iId != null) {
-                            val db = ViewModel.db
+                if (iId != null) {
+                    val db = ViewModel.db
 
-                            val itemName = et_itemName.text.toString().trim()
-                            val oId = ViewModel.character
-                            val category = spnr_category.selectedItem.toString().lowercase()
+                    val itemName = et_itemName.text.toString().trim()
+                    val oId = ViewModel.character
+                    val category = spnr_category.selectedItem.toString().lowercase()
 
-                            val metaData = hashMapOf(
-                                "id" to "$iId",
-                                "name" to "$itemName",
-                                "owner" to "$oId",
-                                "category" to "$category"
-                            )
+                    val metaData = hashMapOf(
+                        "id" to "$iId",
+                        "name" to "$itemName",
+                        "owner" to "$oId",
+                        "category" to "$category"
+                    )
 
+                    var extendedMetaData: HashMap<*,*>? = null
 
-                            val weapon_metaData = hashMapOf(
+                    when (cat)
+                    {
+                        0 -> {
+                            extendedMetaData = hashMapOf(
                                 "id" to "$iId",
                                 "group" to "$weaponProficiency",
                                 "range" to "$weaponRange",
                                 "proficiency" to "${spnr_weapons_proficiency.selectedItem.toString()}",
-                                "damage" to damageArrayList
-
-                            )
-
-                            db.runTransaction { transaction ->
-                                transaction.set(db.collection("items").document(iId), metaData)
-
-                                transaction.set(db.collection("weapons").document(iId), weapon_metaData)
-
-
-                            }.addOnSuccessListener {
-                                view.findNavController().navigateUp()
-                                Toast.makeText(context, "Item Has been added to character.", Toast.LENGTH_SHORT).show()
-                            }.addOnFailureListener {e ->
-                                Toast.makeText(context, "$e", Toast.LENGTH_SHORT).show()
-                            }
+                                "damage" to damageArrayList)
                         }
-
-
-                    }
-                    1 -> {
-                        Log.d("ItemAddFragment", "Selected prof: ${spnr_weapons_proficiency.selectedItem.toString()}")
-
-                        val iId = ViewModel.db.collection("items").document().id
-
-                        if (iId != null) {
-                            val db = ViewModel.db
-
-                            val itemName = et_itemName.text.toString().trim()
-                            val oId = ViewModel.character
-                            val category = spnr_category.selectedItem.toString().lowercase()
-
-                            val metaData = hashMapOf(
-                                "id" to "$iId",
-                                "name" to "$itemName",
-                                "owner" to "$oId",
-                                "category" to "$category"
-                            )
-
+                        1 -> {
                             var ac = 0
                             if (et_armour_ac.text.isNotBlank()) {
                                 ac = et_armour_ac.text.toString().toInt()
@@ -289,49 +255,13 @@ class ItemAddFragment : Fragment() {
                             else {
                                 Toast.makeText(activity, "AC defaulted to 0", Toast.LENGTH_SHORT).show()
                             }
-
-
-                            val armour_metaData = hashMapOf(
+                            extendedMetaData = hashMapOf(
                                 "id" to "$iId",
                                 "proficiency" to "${spnr_armour_proficiency.selectedItem.toString()}",
                                 "slot" to "${spnr_armour_slot.selectedItem.toString()}",
-                                "ac" to "$ac"
-
-                            )
-
-                            db.runTransaction { transaction ->
-                                transaction.set(db.collection("items").document(iId), metaData)
-
-                                transaction.set(db.collection("armour").document(iId), armour_metaData)
-
-
-                            }.addOnSuccessListener {
-                                view.findNavController().navigateUp()
-                                Toast.makeText(context, "Item Has been added to character.", Toast.LENGTH_SHORT).show()
-                            }.addOnFailureListener {e ->
-                                Toast.makeText(context, "$e", Toast.LENGTH_SHORT).show()
-                            }
+                                "ac" to "$ac")
                         }
-                    }
-                    2 -> {
-                        Log.d("ItemAddFragment", "Selected prof: ${spnr_weapons_proficiency.selectedItem.toString()}")
-
-                        val iId = ViewModel.db.collection("items").document().id
-
-                        if (iId != null) {
-                            val db = ViewModel.db
-
-                            val itemName = et_itemName.text.toString().trim()
-                            val oId = ViewModel.character
-                            val category = spnr_category.selectedItem.toString().lowercase()
-
-                            val metaData = hashMapOf(
-                                "id" to "$iId",
-                                "name" to "$itemName",
-                                "owner" to "$oId",
-                                "category" to "$category"
-                            )
-
+                        2 -> {
                             var count = 1
                             if (et_consumables_count.text.isNotBlank()) {
                                 count = et_consumables_count.text.toString().toInt()
@@ -340,60 +270,29 @@ class ItemAddFragment : Fragment() {
                                 Toast.makeText(activity, "Count defaulted to 1", Toast.LENGTH_SHORT).show()
                             }
 
-
-                            val consumables_metaData = hashMapOf(
+                            extendedMetaData = hashMapOf(
                                 "id" to "$iId",
-                                "count" to "$count"
-
-                            )
-
-                            db.runTransaction { transaction ->
-                                transaction.set(db.collection("items").document(iId), metaData)
-
-                                transaction.set(db.collection("consumables").document(iId), consumables_metaData)
-
-
-                            }.addOnSuccessListener {
-                                view.findNavController().navigateUp()
-                                Toast.makeText(context, "Item Has been added to character.", Toast.LENGTH_SHORT).show()
-                            }.addOnFailureListener {e ->
-                                Toast.makeText(context, "$e", Toast.LENGTH_SHORT).show()
-                            }
+                                "count" to "$count")
                         }
-
                     }
-                    3 -> {
-                        Log.d("ItemAddFragment", "Selected prof: ${spnr_weapons_proficiency.selectedItem.toString()}")
+                    db.runTransaction { transaction ->
+                        transaction.set(db.collection("items").document(iId), metaData)
 
-                        val iId = ViewModel.db.collection("items").document().id
 
-                        if (iId != null) {
-                            val db = ViewModel.db
-
-                            val itemName = et_itemName.text.toString().trim()
-                            val oId = ViewModel.character
-                            val category = spnr_category.selectedItem.toString().lowercase()
-
-                            val metaData = hashMapOf(
-                                "id" to "$iId",
-                                "name" to "$itemName",
-                                "owner" to "$oId",
-                                "category" to "$category"
+                        if (extendedMetaData != null) {
+                            transaction.set(db.collection(category).document(iId), extendedMetaData!!
                             )
-
-                            db.runTransaction { transaction ->
-                                transaction.set(db.collection("items").document(iId), metaData)
-
-                            }.addOnSuccessListener {
-                                view.findNavController().navigateUp()
-                                Toast.makeText(context, "Item Has been added to character.", Toast.LENGTH_SHORT).show()
-                            }.addOnFailureListener {e ->
-                                Toast.makeText(context, "$e", Toast.LENGTH_SHORT).show()
-                            }
                         }
 
+
+                    }.addOnSuccessListener {
+                        view.findNavController().navigateUp()
+                        Toast.makeText(context, "Item Has been added to character.", Toast.LENGTH_SHORT).show()
+                    }.addOnFailureListener {e ->
+                        Toast.makeText(context, "$e", Toast.LENGTH_SHORT).show()
                     }
                 }
+
             }
         }
 
