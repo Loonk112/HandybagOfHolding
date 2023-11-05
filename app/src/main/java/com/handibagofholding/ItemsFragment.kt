@@ -23,6 +23,8 @@ class ItemsFragment() : Fragment() {
     private var displayArrayList: ArrayList<ItemMetaData> = ArrayList<ItemMetaData>()
     private lateinit var itemAdapter: ItemAdapter
     private var filter: String? = null
+
+    private var tabId: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -43,6 +45,9 @@ class ItemsFragment() : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab) {
 
                 if (tab != null) {
+
+                    tabId = tab.id
+
                     if (tab.text == "all") {
                         filter = null
                     }
@@ -81,6 +86,8 @@ class ItemsFragment() : Fragment() {
 
         Log.d("ItemsFragment","$cId")
 
+        filter = null
+
         ViewModel.db.collection("items").whereEqualTo("owner","$cId").addSnapshotListener { snapshot, e ->
             if (e != null) {
                 Log.e("ItemsFragment", "Listen failed.", e)
@@ -98,6 +105,7 @@ class ItemsFragment() : Fragment() {
             }
             updateRV()
         }
+
     }
 
     private fun updateRV() {
