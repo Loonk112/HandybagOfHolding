@@ -17,6 +17,7 @@ import android.widget.RadioGroup
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +26,7 @@ import java.util.HashMap
 
 class ItemAddFragment : Fragment() {
 
-    var cat: Int? = null
+    var cat: Int = 0
     var weaponRange = "Melee"
     var weaponProficiency = "Simple"
 
@@ -152,20 +153,26 @@ class ItemAddFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rv_weapons_damageDisplay.layoutManager = LinearLayoutManager(requireActivity())
 
         spnr_category.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>,
-                                        view: View, position: Int, id: Long) {
-                Log.d("ItemAddFragment", "<Category Spinner>\tItem Selected: $position")
-                filterDisplay(position)
-                cat = position
+                                        view: View?, position: Int, id: Long) {
+                if (view != null)
+                {
+                    Log.d("ItemAddFragment", "<Category Spinner>\tItem Selected: $position")
+                    filterDisplay(position)
+                } else filterDisplay(cat)
             }
             override fun onNothingSelected(parent: AdapterView<*>) {
                 Log.d("ItemAddFragment", "<Category Spinner>\tNo item selected")
             }
         }
 
+        Log.d("TEST: ", "1")
+
+        rv_weapons_damageDisplay.layoutManager = LinearLayoutManager(requireActivity())
+
+        Log.d("TEST: ", "2")
         rg_weapons_proficiencyGroup.setOnCheckedChangeListener(
             RadioGroup.OnCheckedChangeListener { _, checkedId ->
                 val radio: RadioButton = view.findViewById(checkedId)
@@ -182,6 +189,7 @@ class ItemAddFragment : Fragment() {
                 }
             })
 
+        Log.d("TEST: ", "3")
         rg_weapons_range.setOnCheckedChangeListener(
             RadioGroup.OnCheckedChangeListener { _, checkedId ->
                 val radio: RadioButton = view.findViewById(checkedId)
@@ -198,6 +206,7 @@ class ItemAddFragment : Fragment() {
                 }
             })
 
+        Log.d("TEST: ", "4")
         b_weapons_addDamage.setOnClickListener {
             if (et_weapons_damageDiceCount.text.isBlank())
             {
@@ -210,6 +219,7 @@ class ItemAddFragment : Fragment() {
             }
         }
 
+        Log.d("TEST: ", "5")
         b_newItemConfirm.setOnClickListener {
             if (et_itemName.text.isBlank()) {
                 Toast.makeText(requireActivity(), "Item name can not be empty.", Toast.LENGTH_SHORT).show()
@@ -295,7 +305,11 @@ class ItemAddFragment : Fragment() {
 
             }
         }
-
+        //Hiding All
+        hide(0)
+        hide(1)
+        hide(2)
+        hide(3)
     }
 
     private fun filterDisplay(optionPosition: Int)
@@ -305,16 +319,8 @@ class ItemAddFragment : Fragment() {
         //Hiding all elements
 
 
-        cat?.let { hide(it) }
+        hide(cat)
 
-
-        if (cat == null)
-        {
-            hide(0)
-            hide(1)
-            hide(2)
-            hide(3)
-        }
 
         show(optionPosition)
 
@@ -365,7 +371,7 @@ class ItemAddFragment : Fragment() {
         when(optionPosition)
         {
             0 -> { //Weapons
-                Log.d("ItemAddFragment", "<hide>\tHiding weapons...")
+                Log.d("ItemAddFragment", "<show>\tShowing weapons...")
                 myView?.findViewById<TextView>(R.id.tv_weapons_proficiencyGroupTitle)!!.visibility = View.VISIBLE
                 rg_weapons_proficiencyGroup.visibility = View.VISIBLE
                 myView?.findViewById<TextView>(R.id.tv_weapons_rangeTitle)!!.visibility = View.VISIBLE
@@ -378,18 +384,18 @@ class ItemAddFragment : Fragment() {
                 myView?.findViewById<Button>(R.id.b_weapons_addDamage)!!.visibility = View.VISIBLE
             }
             1 -> { //Armour
-                Log.d("ItemAddFragment", "<hide>\tHiding armour...")
+                Log.d("ItemAddFragment", "<show>\tShowing armour...")
                 et_armour_ac.visibility = View.VISIBLE
                 myView?.findViewById<LinearLayout>(R.id.ll_armour_linearContainer)!!.visibility = View.VISIBLE
 
             }
             2 -> { //Consumable
-                Log.d("ItemAddFragment", "<hide>\tHiding consumable...")
+                Log.d("ItemAddFragment", "<show>\tShowing consumable...")
                 myView?.findViewById<EditText>(R.id.et_consumables_count)!!.visibility = View.VISIBLE
 
             }
             3 -> { //Other
-                Log.d("ItemAddFragment", "<hide>\tHiding other...")
+                Log.d("ItemAddFragment", "<show>\tShowing other...")
 
 
             }
