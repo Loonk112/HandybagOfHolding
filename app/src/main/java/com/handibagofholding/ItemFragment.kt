@@ -17,6 +17,7 @@ class ItemFragment : Fragment() {
     lateinit var dataList: LinearLayout
     lateinit var ib_return: ImageButton
     lateinit var itemInfo: ItemInfoTile
+    lateinit var noteInfo: NoteInfoTile
 
     var weaponInfoTile: WeaponInfoTile? = null
     var armourInfo: ArmourInfoTile? = null
@@ -43,7 +44,7 @@ class ItemFragment : Fragment() {
                 return@addSnapshotListener
             }
             Log.d("ItemFragment", "$snapshot")
-            if (snapshot != null)
+            if (snapshot != null && snapshot.exists())
             {
                 snapshot.toObject<ItemMetaData>()?.let {
                     when (it.category) {
@@ -64,6 +65,8 @@ class ItemFragment : Fragment() {
             }
         }
 
+        noteInfo = NoteInfoTile(requireContext())
+        dataList.addView(noteInfo)
 
         return view
     }

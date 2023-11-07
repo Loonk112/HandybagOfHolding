@@ -261,6 +261,18 @@
 
             <!-- Other !-->
 
+            <!-- Notes !-->
+
+            <EditText
+                android:id="@+id/et_notes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="top|center_horizontal"
+                android:hint="Notes"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:textSize="20sp" />
 
 
         </LinearLayout>

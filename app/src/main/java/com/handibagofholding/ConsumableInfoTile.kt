@@ -65,7 +65,7 @@ class ConsumableInfoTile @JvmOverloads constructor(
                 return@addSnapshotListener
             }
             Log.d("ConsumableInfoTile", "$snapshot")
-            if (snapshot != null)
+            if (snapshot != null && snapshot.exists())
             {
                 snapshot.toObject<ConsumableData>()?.let {
                     tv_itemCount.text = it.count.toString()

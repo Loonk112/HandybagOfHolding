@@ -3,34 +3,31 @@ package com.handibagofholding
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
-import android.view.View
 import android.widget.TextView
 import androidx.navigation.findNavController
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.ktx.toObject
 import java.util.Locale
 
-class ItemInfoTile @JvmOverloads constructor(
+class NoteInfoTile @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defaultStyleAttribute: Int = 0
 ) : MaterialCardView(context, attributeSet, defaultStyleAttribute) {
 
 
-    private val tv_itemName: TextView
-    private val tv_itemCategory: TextView
+    private val tv_note: TextView
 
     init {
-        inflate(context, R.layout.item_info_tile, this)
+        inflate(context, R.layout.note_info_tile, this)
 
-        tv_itemName = findViewById(R.id.tv_itemName)
-        tv_itemCategory = findViewById(R.id.tv_itemCategory)
+        tv_note = findViewById(R.id.tv_note)
 
         getItemInfo()
 
         this.setOnLongClickListener {
-            Log.d("ItemInfoTile", "Long click detected")
-            findNavController().navigate(R.id.action_itemFragment_to_itemEditFragment)
+            Log.d("NoteInfoTile", "Long click detected")
+            findNavController().navigate(R.id.action_itemFragment_to_noteEditFragment)
             true
         }
 
@@ -39,17 +36,16 @@ class ItemInfoTile @JvmOverloads constructor(
     private fun getItemInfo() {
         val iId = ViewModel.item
 
-        ViewModel.db.collection("items").document(iId).addSnapshotListener { snapshot, e ->
+        ViewModel.db.collection("notes").document(iId).addSnapshotListener { snapshot, e ->
             if (e != null) {
-                Log.e("ItemInfoTile", "Listen failed.", e)
+                Log.e("NoteInfoTile", "Listen failed.", e)
                 return@addSnapshotListener
             }
-            Log.d("ItemInfoTile", "$snapshot")
+            Log.d("NoteInfoTile", "$snapshot")
             if (snapshot != null && snapshot.exists())
             {
-                snapshot.toObject<ItemMetaData>()?.let {
-                    tv_itemName.text = it.name
-                    tv_itemCategory.text = it.category.uppercase(Locale.getDefault())
+                (snapshot.get("note") as String).let {
+                    tv_note.text = it
                 }
             }
         }

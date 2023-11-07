@@ -60,7 +60,7 @@ class WeaponInfoTile @JvmOverloads constructor(
                 return@addSnapshotListener
             }
             Log.d("WeaponInfoTile", "$snapshot")
-            if (snapshot != null)
+            if (snapshot != null && snapshot.exists())
             {
                 damageArrayList.clear()
                 snapshot.toObject<WeaponData>()?.let {

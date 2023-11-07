@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_itemFragment_to_armourEditFragment"
             app:destination="@id/armourEditFragment" />
+        <action
+            android:id="@+id/action_itemFragment_to_noteEditFragment"
+            app:destination="@id/noteEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemEditFragment"
@@ -35,4 +38,9 @@
         android:name="com.handibagofholding.ArmourEditFragment"
         android:label="fragment_armour_edit"
         tools:layout="@layout/fragment_armour_edit" />
+    <fragment
+        android:id="@+id/noteEditFragment"
+        android:name="com.handibagofholding.NoteEditFragment"
+        android:label="fragment_note_edit"
+        tools:layout="@layout/fragment_note_edit" />
 </navigation>

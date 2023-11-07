@@ -51,6 +51,8 @@ class ItemAddFragment : Fragment() {
 
     lateinit var et_consumables_count: EditText
 
+    lateinit var et_notes: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -65,6 +67,8 @@ class ItemAddFragment : Fragment() {
         view.findViewById<Button>(R.id.b_newItemCancel).setOnClickListener {
             view.findNavController().navigateUp()
         }
+
+        et_notes = view.findViewById<EditText>(R.id.et_notes)
 
         //Basic
         et_itemName = view.findViewById<EditText>(R.id.et_itemName)
@@ -292,6 +296,12 @@ class ItemAddFragment : Fragment() {
                         if (extendedMetaData != null) {
                             transaction.set(db.collection(category).document(iId), extendedMetaData!!
                             )
+                        }
+
+                        if (et_notes.text.isNotBlank()) {
+                            val note = hashMapOf(
+                                "note" to et_notes.text.toString().trim().trimIndent())
+                            transaction.set(db.collection("notes").document(iId), note)
                         }
 
 

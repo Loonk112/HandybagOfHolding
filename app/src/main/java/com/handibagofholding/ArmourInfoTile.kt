@@ -45,7 +45,7 @@ class ArmourInfoTile @JvmOverloads constructor(
                 return@addSnapshotListener
             }
             Log.d("ArmourInfoTile", "$snapshot")
-            if (snapshot != null)
+            if (snapshot != null && snapshot.exists())
             {
                 snapshot.toObject<ArmourData>()?.let {
                     Log.d("ArmourInfoTile", "AC: ${it.ac}")
