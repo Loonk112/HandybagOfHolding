@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="5dp"
+    app:strokeColor="@color/black"
+    app:strokeWidth="2dp"
+    app:cardCornerRadius="10dp"
+    android:elevation="1dp">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TableRow
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tv_itemAC"
+                android:text="AC Count"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:textAlignment="viewEnd"
+                android:textStyle="bold"
+                android:padding="5dp"/>
+            <TextView
+                android:text="AC"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:textAlignment="viewStart"
+                android:textStyle="bold"
+                android:padding="5dp"/>
+        </TableRow>
+        <TableRow
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tv_itemProficiency"
+                android:text="Proficiency"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:textAlignment="viewEnd"
+                android:textStyle="italic"
+                android:padding="5dp"/>
+            <TextView
+                android:id="@+id/tv_itemSlot"
+                android:text="Slot"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:textSize="10sp"
+                android:textAlignment="viewStart"
+                android:textStyle="italic"
+                android:padding="5dp"/>
+        </TableRow>
+    </TableLayout>
+
+</com.google.android.material.card.MaterialCardView>

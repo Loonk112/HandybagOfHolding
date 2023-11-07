@@ -11,6 +11,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class ItemDamageAdapter (private val damageList: ArrayList<ItemDamageData>, private val activityContext: Context): RecyclerView.Adapter<ItemDamageAdapter.ViewHolder>() {
+
+    public var canRemoveItems: Boolean = true
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -28,10 +31,12 @@ class ItemDamageAdapter (private val damageList: ArrayList<ItemDamageData>, priv
         holder.count.text = damageViewModel.count.toString()
         holder.dice.text = damageViewModel.dice.toString()
 
-        holder.view.setOnLongClickListener {
-            damageList.removeAt(holder.adapterPosition)
-            notifyItemRemoved(holder.adapterPosition)
-            true
+        if (canRemoveItems) {
+            holder.view.setOnLongClickListener {
+                damageList.removeAt(holder.adapterPosition)
+                notifyItemRemoved(holder.adapterPosition)
+                true
+            }
         }
     }
 

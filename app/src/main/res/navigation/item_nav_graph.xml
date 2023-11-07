@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_nav_graph"
+    app:startDestination="@id/itemFragment">
+
+    <fragment
+        android:id="@+id/itemFragment"
+        android:name="com.handibagofholding.ItemFragment"
+        android:label="fragment_item"
+        tools:layout="@layout/fragment_item" >
+        <action
+            android:id="@+id/action_itemFragment_to_itemEditFragment"
+            app:destination="@id/itemEditFragment" />
+        <action
+            android:id="@+id/action_itemFragment_to_weaponEditFragment"
+            app:destination="@id/weaponEditFragment" />
+        <action
+            android:id="@+id/action_itemFragment_to_armourEditFragment"
+            app:destination="@id/armourEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemEditFragment"
+        android:name="com.handibagofholding.ItemEditFragment"
+        android:label="fragment_item_edit"
+        tools:layout="@layout/fragment_item_edit" />
+    <fragment
+        android:id="@+id/weaponEditFragment"
+        android:name="com.handibagofholding.WeaponEditFragment"
+        android:label="fragment_weapon_edit"
+        tools:layout="@layout/fragment_weapon_edit" />
+    <fragment
+        android:id="@+id/armourEditFragment"
+        android:name="com.handibagofholding.ArmourEditFragment"
+        android:label="fragment_armour_edit"
+        tools:layout="@layout/fragment_armour_edit" />
+</navigation>

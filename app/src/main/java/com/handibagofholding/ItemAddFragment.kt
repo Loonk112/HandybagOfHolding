@@ -269,7 +269,7 @@ class ItemAddFragment : Fragment() {
                                 "id" to "$iId",
                                 "proficiency" to "${spnr_armour_proficiency.selectedItem.toString()}",
                                 "slot" to "${spnr_armour_slot.selectedItem.toString()}",
-                                "ac" to "$ac")
+                                "ac" to ac)
                         }
                         2 -> {
                             var count = 1
@@ -282,7 +282,7 @@ class ItemAddFragment : Fragment() {
 
                             extendedMetaData = hashMapOf(
                                 "id" to "$iId",
-                                "count" to "$count")
+                                "count" to count)
                         }
                     }
                     db.runTransaction { transaction ->
