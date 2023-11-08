@@ -64,12 +64,19 @@ class ItemEditFragment : Fragment() {
             val name = et_itemName.text.toString().trim()
 
             ViewModel.db.collection("items").document(ViewModel.item).update("name",name).addOnSuccessListener {
-                view.findNavController().navigateUp()
-                Toast.makeText(requireContext(), "Item edited.", Toast.LENGTH_SHORT).show()
+                context?.let {
+                    Toast.makeText(it, "Item edited.", Toast.LENGTH_SHORT).show()
+                }
             }.addOnFailureListener {
-                Toast.makeText(requireContext(), "There was a problem with updating data.", Toast.LENGTH_SHORT).show()
+                context?.let {
+                    Toast.makeText(
+                        it,
+                        "There was a problem with updating data.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
-
+            view.findNavController().navigateUp()
 
         }
     }

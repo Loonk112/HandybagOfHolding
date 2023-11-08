@@ -2,6 +2,10 @@ package com.handibagofholding
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestoreSettings
+import com.google.firebase.firestore.ktx.memoryCacheSettings
+import com.google.firebase.firestore.ktx.persistentCacheSettings
+import com.google.firebase.ktx.Firebase
 
 object ViewModel {
     private var _account: String
@@ -16,6 +20,11 @@ object ViewModel {
         _item = "null"
         _db = FirebaseFirestore.getInstance()
         _auth = FirebaseAuth.getInstance()
+        val settings = firestoreSettings {
+            setLocalCacheSettings(memoryCacheSettings {})
+            setLocalCacheSettings(persistentCacheSettings {})
+        }
+        _db.firestoreSettings = settings
     }
 
     var account: String

@@ -172,11 +172,8 @@ class ItemAddFragment : Fragment() {
             }
         }
 
-        Log.d("TEST: ", "1")
-
         rv_weapons_damageDisplay.layoutManager = LinearLayoutManager(requireActivity())
 
-        Log.d("TEST: ", "2")
         rg_weapons_proficiencyGroup.setOnCheckedChangeListener(
             RadioGroup.OnCheckedChangeListener { _, checkedId ->
                 val radio: RadioButton = view.findViewById(checkedId)
@@ -193,7 +190,6 @@ class ItemAddFragment : Fragment() {
                 }
             })
 
-        Log.d("TEST: ", "3")
         rg_weapons_range.setOnCheckedChangeListener(
             RadioGroup.OnCheckedChangeListener { _, checkedId ->
                 val radio: RadioButton = view.findViewById(checkedId)
@@ -210,7 +206,6 @@ class ItemAddFragment : Fragment() {
                 }
             })
 
-        Log.d("TEST: ", "4")
         b_weapons_addDamage.setOnClickListener {
             if (et_weapons_damageDiceCount.text.isBlank())
             {
@@ -223,7 +218,6 @@ class ItemAddFragment : Fragment() {
             }
         }
 
-        Log.d("TEST: ", "5")
         b_newItemConfirm.setOnClickListener {
             if (et_itemName.text.isBlank()) {
                 Toast.makeText(requireActivity(), "Item name can not be empty.", Toast.LENGTH_SHORT).show()
@@ -306,11 +300,17 @@ class ItemAddFragment : Fragment() {
 
 
                     }.addOnSuccessListener {
-                        view.findNavController().navigateUp()
-                        Toast.makeText(context, "Item Has been added to character.", Toast.LENGTH_SHORT).show()
+                        Log.d("ItemAddFragment", "Toast checker:")
+                        Log.d("ItemAddFragment", context.toString())
+                        context?.let {
+                            Toast.makeText(it, "Item Has been added to character.", Toast.LENGTH_SHORT).show()
+                        }
                     }.addOnFailureListener {e ->
-                        Toast.makeText(context, "$e", Toast.LENGTH_SHORT).show()
+                        context?.let {
+                            Toast.makeText(it, "$e", Toast.LENGTH_SHORT).show()
+                        }
                     }
+                    view.findNavController().navigateUp()
                 }
 
             }

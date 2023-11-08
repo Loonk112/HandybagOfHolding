@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="Proficiency Group"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RadioGroup
+        android:id="@+id/rg_weapons_proficiencyGroup"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:checkedButton="@id/rb_weapons_simple">
+        <RadioButton
+            android:id="@+id/rb_weapons_simple"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Simple"/>
+        <RadioButton
+            android:id="@+id/rb_weapons_martial"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Martial"/>
+    </RadioGroup>
+
+    <TextView
+        android:text="Weapon Range"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RadioGroup
+        android:id="@+id/rg_weapons_range"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:checkedButton="@id/rb_weapons_melee">
+        <RadioButton
+            android:id="@+id/rb_weapons_melee"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Melee"/>
+        <RadioButton
+            android:id="@+id/rb_weapons_ranged"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Ranged"/>
+    </RadioGroup>
+
+    <TextView
+        android:text="Weapon Proficiency"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Spinner
+        android:id="@+id/spnr_weapons_proficiency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:spinnerMode="dialog"/>
+
+    <TextView
+        android:text="Weapon Damage"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:id="@+id/ll_weapons_damageAddLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <Spinner
+            android:id="@+id/spnr_weapons_damageType"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:layout_marginHorizontal="10dp"
+            android:spinnerMode="dialog"/>
+        <EditText
+            android:id="@+id/et_weapons_damageCount"
+            android:hint="Count"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="number"/>
+        <Spinner
+            android:id="@+id/spnr_weapons_damageDice"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:layout_marginHorizontal="10dp"
+            android:spinnerMode="dialog"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/b_weapons_addDamage"
+        android:text="Add damage"
+        android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_weapons_damageDisplay"
+        tools:listitem="@layout/item_damage_layout"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:itemCount="4"/>
+
+    <TextView
+        android:text="Long press to remove damage"
+        android:gravity="center"
+        android:textStyle="italic"
+        android:textSize="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

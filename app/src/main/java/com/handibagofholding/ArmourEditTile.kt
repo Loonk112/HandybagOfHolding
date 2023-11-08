@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -14,7 +15,7 @@ class ArmourEditTile @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defaultStyleAttribute: Int = 0
-) : MaterialCardView(context, attributeSet, defaultStyleAttribute) {
+) : LinearLayout(context, attributeSet, defaultStyleAttribute) {
 
 
     private val et_ac: TextView

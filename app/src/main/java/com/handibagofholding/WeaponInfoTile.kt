@@ -62,6 +62,8 @@ class WeaponInfoTile @JvmOverloads constructor(
             Log.d("WeaponInfoTile", "$snapshot")
             if (snapshot != null && snapshot.exists())
             {
+                rv_itemDamage.suppressLayout(false)
+
                 damageArrayList.clear()
                 snapshot.toObject<WeaponData>()?.let {
                     tv_itemGroup.text = it.group
@@ -75,6 +77,7 @@ class WeaponInfoTile @JvmOverloads constructor(
                     Log.d("WeaponInfoTile", "${damageArrayList}")
                 }
                 damageAdapter.notifyDataSetChanged()
+                rv_itemDamage.suppressLayout(true)
             }
         }
     }

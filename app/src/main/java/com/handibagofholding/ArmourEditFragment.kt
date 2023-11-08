@@ -60,12 +60,19 @@ class ArmourEditFragment : Fragment() {
         b_editConfirm.setOnClickListener {
 
             ViewModel.db.collection("armour").document(ViewModel.item).set(editTile.getValues()).addOnSuccessListener {
-                view.findNavController().navigateUp()
-                Toast.makeText(requireContext(), "Item edited.", Toast.LENGTH_SHORT).show()
+                context?.let {
+                    Toast.makeText(it, "Item edited.", Toast.LENGTH_SHORT).show()
+                }
             }.addOnFailureListener {
-                Toast.makeText(requireContext(), "There was a problem with updating data.", Toast.LENGTH_SHORT).show()
+                context?.let {
+                    Toast.makeText(
+                        it,
+                        "There was a problem with updating data.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
-
+            view.findNavController().navigateUp()
 
         }
 

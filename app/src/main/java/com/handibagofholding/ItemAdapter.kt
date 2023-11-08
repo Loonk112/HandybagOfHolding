@@ -51,11 +51,15 @@ class ItemAdapter (val itemList: ArrayList<ItemMetaData>, private val activityCo
 
                         transaction.delete(ViewModel.db.collection("items").document("${itemViewModel.id}"))
                         transaction.delete(ViewModel.db.collection(itemViewModel.category).document("${itemViewModel.id}"))
+                        transaction.delete(ViewModel.db.collection("notes").document("${itemViewModel.id}"))
 
                     }.addOnSuccessListener {
                         Log.d("Firebase", "Item was deleted")
                         Toast.makeText(activityContext, "${itemViewModel.name} was deleted.", Toast.LENGTH_SHORT).show()
-                    }.addOnFailureListener { e -> Log.w("Firebase", "Error deleting document", e) }
+                    }.addOnFailureListener { e ->
+                        Log.w("Firebase", "Error deleting document", e)
+                        Toast.makeText(activityContext, "${itemViewModel.name} was NOT deleted!", Toast.LENGTH_SHORT).show()
+                    }
 
 
                 }
