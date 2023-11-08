@@ -56,22 +56,25 @@ class NoteEditFragment : Fragment() {
 
         b_editConfirm.setOnClickListener {
 
-            ViewModel.db.collection("notes").document(ViewModel.item).set(editTile.getValue()).addOnSuccessListener {
-                context?.let {
-                    Toast.makeText(it, "Item edited.", Toast.LENGTH_SHORT).show()
-                }
-            }.addOnFailureListener {
-                Log.e("NoteEditFragment", "Error passing data", it)
-                context?.let {
-                    Toast.makeText(
-                        it,
-                        "There was a problem with updating data.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-            view.findNavController().navigateUp()
+            if (editTile.getValue() != null) {
 
+                ViewModel.db.collection("notes").document(ViewModel.item).set(editTile.getValue()!!)
+                    .addOnSuccessListener {
+                        context?.let {
+                            Toast.makeText(it, "Item edited.", Toast.LENGTH_SHORT).show()
+                        }
+                    }.addOnFailureListener {
+                    Log.e("NoteEditFragment", "Error passing data", it)
+                    context?.let {
+                        Toast.makeText(
+                            it,
+                            "There was a problem with updating data.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+                view.findNavController().navigateUp()
+            }
         }
 
     }

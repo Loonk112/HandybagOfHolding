@@ -25,7 +25,10 @@ class NoteEditTile @JvmOverloads constructor(
         et_itemNotes.setText(value)
     }
 
-    public fun getValue(): HashMap<*, String> {
+    public fun getValue(): HashMap<*, String>? {
+
+        if (et_itemNotes.text.isBlank()) return null
+
 
         val stringOut = et_itemNotes.text.toString().trim().trimIndent()
 

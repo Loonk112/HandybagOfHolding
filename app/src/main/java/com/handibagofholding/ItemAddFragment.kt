@@ -26,32 +26,20 @@ import java.util.HashMap
 
 class ItemAddFragment : Fragment() {
 
-    var cat: Int = 0
-    var weaponRange = "Melee"
-    var weaponProficiency = "Simple"
+    private var cat: Int = 0
 
-    lateinit var b_newItemConfirm: Button
-    lateinit var et_itemName: EditText
-    lateinit var spnr_category: Spinner
-    lateinit var rg_weapons_proficiencyGroup: RadioGroup
-    lateinit var rg_weapons_range: RadioGroup
-    lateinit var spnr_weapons_proficiency: Spinner
-    lateinit var rv_weapons_damageDisplay: RecyclerView
-    lateinit var spnr_weapons_damageType: Spinner
-    lateinit var spnr_weapons_damageDice: Spinner
-    lateinit var et_weapons_damageDiceCount: EditText
-    lateinit var b_weapons_addDamage: Button
+    private lateinit var b_newItemConfirm: Button
+    private lateinit var et_itemName: EditText
+    private lateinit var spnr_category: Spinner
 
-    lateinit var damageArrayList: ArrayList<ItemDamageData>
-    lateinit var damageAdapter: ItemDamageAdapter
+    private lateinit var weaponEditTile: WeaponEditTile
 
-    lateinit var et_armour_ac: EditText
-    lateinit var spnr_armour_proficiency: Spinner
-    lateinit var spnr_armour_slot: Spinner
+    private lateinit var armourEditTile: ArmourEditTile
 
-    lateinit var et_consumables_count: EditText
+    private lateinit var et_consumables_count: EditText
 
-    lateinit var et_notes: EditText
+    private lateinit var noteEditTile: NoteEditTile
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +56,6 @@ class ItemAddFragment : Fragment() {
             view.findNavController().navigateUp()
         }
 
-        et_notes = view.findViewById<EditText>(R.id.et_notes)
 
         //Basic
         et_itemName = view.findViewById<EditText>(R.id.et_itemName)
@@ -85,72 +72,20 @@ class ItemAddFragment : Fragment() {
         else Log.e("ItemAddFragment", "Can't find view!")
 
         //Weapons
-        rg_weapons_proficiencyGroup = view.findViewById<RadioGroup>(R.id.rg_weapons_proficiencyGroup)
-        rg_weapons_range = view.findViewById<RadioGroup>(R.id.rg_weapons_range)
-        spnr_weapons_proficiency = view.findViewById<Spinner>(R.id.spnr_weapons_proficiency)
-        spnr_weapons_damageType = view.findViewById<Spinner>(R.id.spnr_weapons_damageType)
-        spnr_weapons_damageDice = view.findViewById<Spinner>(R.id.spnr_weapons_damageDice)
-        et_weapons_damageDiceCount = view.findViewById<EditText>(R.id.et_weapons_damageCount)
-        rv_weapons_damageDisplay = view.findViewById<RecyclerView>(R.id.rv_weapons_damageDisplay)
-        b_weapons_addDamage = view.findViewById<Button>(R.id.b_weapons_addDamage)
 
-        if (spnr_weapons_proficiency != null) {
-            val adapter = ArrayAdapter( //TODO: Spinner item
-                requireContext(),
-                android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_weaponSimpleProficiencyMelee)
-            )
-            spnr_weapons_proficiency.adapter = adapter
-        }
-        else Log.e("ItemAddFragment", "Can't find view!")
-
-        if (spnr_weapons_damageType != null) {
-            val adapter = ArrayAdapter( //TODO: Spinner item
-                requireContext(),
-                android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_damageTypes)
-            )
-            spnr_weapons_damageType.adapter = adapter
-        }
-        else Log.e("ItemAddFragment", "Can't find view!")
-
-        if (spnr_weapons_damageDice != null) {
-            val adapter = ArrayAdapter( //TODO: Spinner item
-                requireContext(),
-                android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_damageDice)
-            )
-            spnr_weapons_damageDice.adapter = adapter
-        }
-        else Log.e("ItemAddFragment", "Can't find view!")
-
-        damageArrayList = ArrayList<ItemDamageData>()
-        damageAdapter = ItemDamageAdapter(damageArrayList, requireActivity())
-        rv_weapons_damageDisplay.adapter = damageAdapter
+        weaponEditTile = view.findViewById(R.id.weaponEditTile)
 
         //Armour
-        et_armour_ac = view.findViewById<EditText>(R.id.et_armour_ac)
-        spnr_armour_proficiency = view.findViewById<Spinner>(R.id.spnr_armour_proficiency)
-        spnr_armour_slot = view.findViewById<Spinner>(R.id.spnr_armour_slot)
 
-        if (spnr_armour_proficiency != null) {
-            val adapter = ArrayAdapter( //TODO: Spinner item
-                requireContext(),
-                android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_armourProficiencies)
-            )
-            spnr_armour_proficiency.adapter = adapter
-        }
-        else Log.e("ItemAddFragment", "Can't find view!")
-
-        if (spnr_armour_slot != null) {
-            val adapter = ArrayAdapter( //TODO: Spinner item
-                requireContext(),
-                android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_armourSlot)
-            )
-            spnr_armour_slot.adapter = adapter
-        }
-        else Log.e("ItemAddFragment", "Can't find view!")
+        armourEditTile = view.findViewById(R.id.armourEditTile)
 
         //Consumables
 
         et_consumables_count = view.findViewById<EditText>(R.id.et_consumables_count)
+
+        //Notes
+
+        noteEditTile = view.findViewById(R.id.noteEditTile)
 
         return view
     }
@@ -172,51 +107,6 @@ class ItemAddFragment : Fragment() {
             }
         }
 
-        rv_weapons_damageDisplay.layoutManager = LinearLayoutManager(requireActivity())
-
-        rg_weapons_proficiencyGroup.setOnCheckedChangeListener(
-            RadioGroup.OnCheckedChangeListener { _, checkedId ->
-                val radio: RadioButton = view.findViewById(checkedId)
-                when (radio.text.toString())
-                {
-                    "Simple" -> {
-                        weaponProficiency = radio.text.toString()
-                        updateWeaponsProficiency(weaponProficiency, weaponRange)
-                    }
-                    "Martial" -> {
-                        weaponProficiency = radio.text.toString()
-                        updateWeaponsProficiency(weaponProficiency, weaponRange)
-                    }
-                }
-            })
-
-        rg_weapons_range.setOnCheckedChangeListener(
-            RadioGroup.OnCheckedChangeListener { _, checkedId ->
-                val radio: RadioButton = view.findViewById(checkedId)
-                when (radio.text)
-                {
-                    "Melee" -> {
-                        weaponRange = radio.text.toString()
-                        updateWeaponsProficiency(weaponProficiency, weaponRange)
-                    }
-                    "Ranged" -> {
-                        weaponRange = radio.text.toString()
-                        updateWeaponsProficiency(weaponProficiency, weaponRange)
-                    }
-                }
-            })
-
-        b_weapons_addDamage.setOnClickListener {
-            if (et_weapons_damageDiceCount.text.isBlank())
-            {
-                Toast.makeText(context, "Dice count is requireds to add damage.", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                damageArrayList.add(ItemDamageData(spnr_weapons_damageType.selectedItem.toString(), et_weapons_damageDiceCount.text.toString().toInt(), spnr_weapons_damageDice.selectedItem.toString()))
-                rv_weapons_damageDisplay.adapter?.notifyItemInserted(damageArrayList.size)
-                Log.d("ItemAddFragment", "$damageArrayList")
-            }
-        }
 
         b_newItemConfirm.setOnClickListener {
             if (et_itemName.text.isBlank()) {
@@ -228,6 +118,8 @@ class ItemAddFragment : Fragment() {
                 Log.d("ItemAddFragment", "Selected cat: ${spnr_category.selectedItem.toString()}")
 
                 val iId = ViewModel.db.collection("items").document().id
+
+                ViewModel.item = iId
 
                 if (iId != null) {
                     val db = ViewModel.db
@@ -243,31 +135,15 @@ class ItemAddFragment : Fragment() {
                         "category" to "$category"
                     )
 
-                    var extendedMetaData: HashMap<*,*>? = null
+                    var extendedMetaData: Any? = null
 
                     when (cat)
                     {
                         0 -> {
-                            extendedMetaData = hashMapOf(
-                                "id" to "$iId",
-                                "group" to "$weaponProficiency",
-                                "range" to "$weaponRange",
-                                "proficiency" to "${spnr_weapons_proficiency.selectedItem.toString()}",
-                                "damage" to damageArrayList)
+                            extendedMetaData = weaponEditTile.getValue()
                         }
                         1 -> {
-                            var ac = 0
-                            if (et_armour_ac.text.isNotBlank()) {
-                                ac = et_armour_ac.text.toString().toInt()
-                            }
-                            else {
-                                Toast.makeText(activity, "AC defaulted to 0", Toast.LENGTH_SHORT).show()
-                            }
-                            extendedMetaData = hashMapOf(
-                                "id" to "$iId",
-                                "proficiency" to "${spnr_armour_proficiency.selectedItem.toString()}",
-                                "slot" to "${spnr_armour_slot.selectedItem.toString()}",
-                                "ac" to ac)
+                            extendedMetaData = armourEditTile.getValues()
                         }
                         2 -> {
                             var count = 1
@@ -292,9 +168,8 @@ class ItemAddFragment : Fragment() {
                             )
                         }
 
-                        if (et_notes.text.isNotBlank()) {
-                            val note = hashMapOf(
-                                "note" to et_notes.text.toString().trim().trimIndent())
+                        if (noteEditTile.getValue() != null) {
+                            val note = noteEditTile.getValue()!!
                             transaction.set(db.collection("notes").document(iId), note)
                         }
 
@@ -312,7 +187,7 @@ class ItemAddFragment : Fragment() {
                     }
                     view.findNavController().navigateUp()
                 }
-
+                ViewModel.clearItemData()
             }
         }
         //Hiding All
@@ -345,22 +220,12 @@ class ItemAddFragment : Fragment() {
         {
             0 -> { //Weapons
                 Log.d("ItemAddFragment", "<hide>\tHiding weapons...")
-                myView?.findViewById<TextView>(R.id.tv_weapons_proficiencyGroupTitle)!!.visibility = View.GONE
-                rg_weapons_proficiencyGroup.visibility = View.GONE
-                myView?.findViewById<TextView>(R.id.tv_weapons_rangeTitle)!!.visibility = View.GONE
-                rg_weapons_range.visibility = View.GONE
-                myView?.findViewById<TextView>(R.id.tv_weapons_proficiencyTitle)!!.visibility = View.GONE
-                spnr_weapons_proficiency.visibility = View.GONE
-                myView?.findViewById<TextView>(R.id.tv_weapons_damageTitle)!!.visibility = View.GONE
-                rv_weapons_damageDisplay.visibility = View.GONE
-                myView?.findViewById<LinearLayout>(R.id.ll_weapons_damageAddLayout)!!.visibility = View.GONE
-                myView?.findViewById<Button>(R.id.b_weapons_addDamage)!!.visibility = View.GONE
+                weaponEditTile.visibility = View.GONE
 
             }
             1 -> { //Armour
                 Log.d("ItemAddFragment", "<hide>\tHiding armour...")
-                et_armour_ac.visibility = View.GONE
-                myView?.findViewById<LinearLayout>(R.id.ll_armour_linearContainer)!!.visibility = View.GONE
+                armourEditTile.visibility = View.GONE
 
             }
             2 -> { //Consumable
@@ -382,21 +247,11 @@ class ItemAddFragment : Fragment() {
         {
             0 -> { //Weapons
                 Log.d("ItemAddFragment", "<show>\tShowing weapons...")
-                myView?.findViewById<TextView>(R.id.tv_weapons_proficiencyGroupTitle)!!.visibility = View.VISIBLE
-                rg_weapons_proficiencyGroup.visibility = View.VISIBLE
-                myView?.findViewById<TextView>(R.id.tv_weapons_rangeTitle)!!.visibility = View.VISIBLE
-                rg_weapons_range.visibility = View.VISIBLE
-                myView?.findViewById<TextView>(R.id.tv_weapons_proficiencyTitle)!!.visibility = View.VISIBLE
-                spnr_weapons_proficiency.visibility = View.VISIBLE
-                myView?.findViewById<TextView>(R.id.tv_weapons_damageTitle)!!.visibility = View.VISIBLE
-                rv_weapons_damageDisplay.visibility = View.VISIBLE
-                myView?.findViewById<LinearLayout>(R.id.ll_weapons_damageAddLayout)!!.visibility = View.VISIBLE
-                myView?.findViewById<Button>(R.id.b_weapons_addDamage)!!.visibility = View.VISIBLE
+                weaponEditTile.visibility = View.VISIBLE
             }
             1 -> { //Armour
                 Log.d("ItemAddFragment", "<show>\tShowing armour...")
-                et_armour_ac.visibility = View.VISIBLE
-                myView?.findViewById<LinearLayout>(R.id.ll_armour_linearContainer)!!.visibility = View.VISIBLE
+                armourEditTile.visibility = View.VISIBLE
 
             }
             2 -> { //Consumable
@@ -408,50 +263,6 @@ class ItemAddFragment : Fragment() {
                 Log.d("ItemAddFragment", "<show>\tShowing other...")
 
 
-            }
-        }
-    }
-
-    private fun updateWeaponsProficiency(proficiency: String, range: String)
-    {
-        spnr_weapons_proficiency.let {
-            if (proficiency == "Simple")
-            {
-                if (range == "Melee")
-                {// Simple Melee
-                    val adapter = ArrayAdapter( //TODO: Spinner item
-                        requireContext(),
-                        android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_weaponSimpleProficiencyMelee)
-                    )
-                    it!!.adapter = adapter
-                }
-                else
-                {// Simple Ranged
-                    val adapter = ArrayAdapter( //TODO: Spinner item
-                        requireContext(),
-                        android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_weaponSimpleProficiencyRanged)
-                    )
-                    it!!.adapter = adapter
-                }
-            }
-            else
-            {
-                if (range == "Melee")
-                {// Martial Melee
-                    val adapter = ArrayAdapter( //TODO: Spinner item
-                        requireContext(),
-                        android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_weaponMartialProficiencyMelee)
-                    )
-                    it!!.adapter = adapter
-                }
-                else
-                {// Martial Ranged
-                    val adapter = ArrayAdapter( //TODO: Spinner item
-                        requireContext(),
-                        android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_weaponMartialProficiencyRanged)
-                    )
-                    it!!.adapter = adapter
-                }
             }
         }
     }
