@@ -6,8 +6,6 @@ import android.util.Log
 import android.widget.TextView
 import androidx.navigation.findNavController
 import com.google.android.material.card.MaterialCardView
-import com.google.firebase.firestore.ktx.toObject
-import java.util.Locale
 
 class NoteInfoTile @JvmOverloads constructor(
     context: Context,
@@ -16,12 +14,12 @@ class NoteInfoTile @JvmOverloads constructor(
 ) : MaterialCardView(context, attributeSet, defaultStyleAttribute) {
 
 
-    private val tv_note: TextView
+    private val tvNote: TextView
 
     init {
         inflate(context, R.layout.note_info_tile, this)
 
-        tv_note = findViewById(R.id.tv_note)
+        tvNote = findViewById(R.id.tv_note)
 
         getItemInfo()
 
@@ -45,7 +43,7 @@ class NoteInfoTile @JvmOverloads constructor(
             if (snapshot != null && snapshot.exists())
             {
                 (snapshot.get("note") as String).let {
-                    tv_note.text = it
+                    tvNote.text = it
                 }
             }
         }

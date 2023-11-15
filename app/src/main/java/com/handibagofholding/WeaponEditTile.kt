@@ -13,7 +13,6 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
 
 class WeaponEditTile @JvmOverloads constructor(
     context: Context,
@@ -24,14 +23,14 @@ class WeaponEditTile @JvmOverloads constructor(
     private var weaponRange = "Melee"
     private var weaponProficiency = "Simple"
 
-    private var rg_weapons_proficiencyGroup: RadioGroup
-    private var rg_weapons_range: RadioGroup
-    private var spnr_weapons_proficiency: Spinner
-    private var rv_weapons_damageDisplay: RecyclerView
-    private var spnr_weapons_damageType: Spinner
-    private var spnr_weapons_damageDice: Spinner
-    private var et_weapons_damageDiceCount: EditText
-    private var b_weapons_addDamage: Button
+    private var rgWeaponsProficiencyGroup: RadioGroup
+    private var rgWeaponsRange: RadioGroup
+    private var spnrWeaponsProficiency: Spinner
+    private var rvWeaponsDamageDisplay: RecyclerView
+    private var spnrWeaponsDamageType: Spinner
+    private var spnrWeaponsDamageDice: Spinner
+    private var etWeaponsDamageDiceCount: EditText
+    private var bWeaponsAddDamage: Button
 
     private var damageArrayList: ArrayList<ItemDamageData>
     private var damageAdapter: ItemDamageAdapter
@@ -40,138 +39,123 @@ class WeaponEditTile @JvmOverloads constructor(
     init {
         inflate(context, R.layout.weapon_edit_tile, this)
 
-        rg_weapons_proficiencyGroup = findViewById<RadioGroup>(R.id.rg_weapons_proficiencyGroup)
-        rg_weapons_range = findViewById<RadioGroup>(R.id.rg_weapons_range)
-        spnr_weapons_proficiency = findViewById<Spinner>(R.id.spnr_weapons_proficiency)
-        spnr_weapons_damageType = findViewById<Spinner>(R.id.spnr_weapons_damageType)
-        spnr_weapons_damageDice = findViewById<Spinner>(R.id.spnr_weapons_damageDice)
-        et_weapons_damageDiceCount = findViewById<EditText>(R.id.et_weapons_damageCount)
-        rv_weapons_damageDisplay = findViewById<RecyclerView>(R.id.rv_weapons_damageDisplay)
-        b_weapons_addDamage = findViewById<Button>(R.id.b_weapons_addDamage)
+        rgWeaponsProficiencyGroup = findViewById(R.id.rg_weapons_proficiencyGroup)
+        rgWeaponsRange = findViewById(R.id.rg_weapons_range)
+        spnrWeaponsProficiency = findViewById(R.id.spnr_weapons_proficiency)
+        spnrWeaponsDamageType = findViewById(R.id.spnr_weapons_damageType)
+        spnrWeaponsDamageDice = findViewById(R.id.spnr_weapons_damageDice)
+        etWeaponsDamageDiceCount = findViewById(R.id.et_weapons_damageCount)
+        rvWeaponsDamageDisplay = findViewById(R.id.rv_weapons_damageDisplay)
+        bWeaponsAddDamage = findViewById(R.id.b_weapons_addDamage)
 
-        if (spnr_weapons_proficiency != null) {
+        spnrWeaponsProficiency.let {
             val adapter = ArrayAdapter( //TODO: Spinner item
                 context,
                 android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_weaponSimpleProficiencyMelee)
             )
-            spnr_weapons_proficiency.adapter = adapter
+            spnrWeaponsProficiency.adapter = adapter
         }
-        else Log.e("WeaponEditTile", "Can't find view!")
 
-        if (spnr_weapons_damageType != null) {
+        spnrWeaponsDamageType.let {
             val adapter = ArrayAdapter( //TODO: Spinner item
                 context,
                 android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_damageTypes)
             )
-            spnr_weapons_damageType.adapter = adapter
+            spnrWeaponsDamageType.adapter = adapter
         }
-        else Log.e("WeaponEditTile", "Can't find view!")
 
-        if (spnr_weapons_damageDice != null) {
+        spnrWeaponsDamageDice.let {
             val adapter = ArrayAdapter( //TODO: Spinner item
                 context,
                 android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_damageDice)
             )
-            spnr_weapons_damageDice.adapter = adapter
+            spnrWeaponsDamageDice.adapter = adapter
         }
-        else Log.e("WeaponEditTile", "Can't find view!")
 
-        damageArrayList = ArrayList<ItemDamageData>()
+        damageArrayList = ArrayList()
         damageAdapter = ItemDamageAdapter(damageArrayList, context)
-        rv_weapons_damageDisplay.adapter = damageAdapter
+        rvWeaponsDamageDisplay.adapter = damageAdapter
 
-        rv_weapons_damageDisplay.layoutManager = LinearLayoutManager(context)
+        rvWeaponsDamageDisplay.layoutManager = LinearLayoutManager(context)
 
-        rg_weapons_proficiencyGroup.setOnCheckedChangeListener(
-            RadioGroup.OnCheckedChangeListener { _, checkedId ->
-                val radio: RadioButton = findViewById(checkedId)
-                when (radio.text.toString())
-                {
-                    "Simple" -> {
-                        weaponProficiency = radio.text.toString()
-                        updateWeaponsProficiency(weaponProficiency, weaponRange)
-                    }
-                    "Martial" -> {
-                        weaponProficiency = radio.text.toString()
-                        updateWeaponsProficiency(weaponProficiency, weaponRange)
-                    }
+        rgWeaponsProficiencyGroup.setOnCheckedChangeListener { _, checkedId ->
+            val radio: RadioButton = findViewById(checkedId)
+            when (radio.text.toString()) {
+                "Simple" -> {
+                    weaponProficiency = radio.text.toString()
+                    updateWeaponsProficiency(weaponProficiency, weaponRange)
                 }
-            })
 
-        rg_weapons_range.setOnCheckedChangeListener(
-            RadioGroup.OnCheckedChangeListener { _, checkedId ->
-                val radio: RadioButton = findViewById(checkedId)
-                when (radio.text)
-                {
-                    "Melee" -> {
-                        weaponRange = radio.text.toString()
-                        updateWeaponsProficiency(weaponProficiency, weaponRange)
-                    }
-                    "Ranged" -> {
-                        weaponRange = radio.text.toString()
-                        updateWeaponsProficiency(weaponProficiency, weaponRange)
-                    }
+                "Martial" -> {
+                    weaponProficiency = radio.text.toString()
+                    updateWeaponsProficiency(weaponProficiency, weaponRange)
                 }
-            })
+            }
+        }
 
-        b_weapons_addDamage.setOnClickListener {
-            if (et_weapons_damageDiceCount.text.isBlank())
+        rgWeaponsRange.setOnCheckedChangeListener { _, checkedId ->
+            val radio: RadioButton = findViewById(checkedId)
+            when (radio.text) {
+                "Melee" -> {
+                    weaponRange = radio.text.toString()
+                    updateWeaponsProficiency(weaponProficiency, weaponRange)
+                }
+
+                "Ranged" -> {
+                    weaponRange = radio.text.toString()
+                    updateWeaponsProficiency(weaponProficiency, weaponRange)
+                }
+            }
+        }
+
+        bWeaponsAddDamage.setOnClickListener {
+            if (etWeaponsDamageDiceCount.text.isBlank())
             {
                 Toast.makeText(context, "Dice count is required to add damage.", Toast.LENGTH_SHORT).show()
             }
             else {
-                damageArrayList.add(ItemDamageData(spnr_weapons_damageType.selectedItem.toString(), et_weapons_damageDiceCount.text.toString().toInt(), spnr_weapons_damageDice.selectedItem.toString()))
-                rv_weapons_damageDisplay.adapter?.notifyItemInserted(damageArrayList.size)
+                damageArrayList.add(ItemDamageData(spnrWeaponsDamageType.selectedItem.toString(), etWeaponsDamageDiceCount.text.toString().toInt(), spnrWeaponsDamageDice.selectedItem.toString()))
+                rvWeaponsDamageDisplay.adapter?.notifyItemInserted(damageArrayList.size)
                 Log.d("WeaponEditTile", "$damageArrayList")
             }
         }
     }
 
-    public fun setValue(value: WeaponData) {
+    fun setValue(value: WeaponData) {
 
 
         when (value.range) {
             "Melee" -> {
-                findViewById<RadioButton>(R.id.rb_weapons_melee).setChecked(true)
+                findViewById<RadioButton>(R.id.rb_weapons_melee).isChecked = true
             }
             "Ranged" -> {
-                findViewById<RadioButton>(R.id.rb_weapons_ranged).setChecked(true)
+                findViewById<RadioButton>(R.id.rb_weapons_ranged).isChecked = true
             }
         }
         when (value.group) {
             "Simple" -> {
-                findViewById<RadioButton>(R.id.rb_weapons_simple).setChecked(true)
+                findViewById<RadioButton>(R.id.rb_weapons_simple).isChecked = true
             }
             "Martial" -> {
-                findViewById<RadioButton>(R.id.rb_weapons_martial).setChecked(true)
+                findViewById<RadioButton>(R.id.rb_weapons_martial).isChecked = true
             }
         }
 
-        var proficiencyArray = arrayOf<String>()
-        if (weaponProficiency == "Simple")
-        {
-            if (weaponRange == "Melee")
-            {// Simple Melee
-                proficiencyArray = resources.getStringArray(R.array.sa_weaponSimpleProficiencyMelee)
+        val proficiencyArray = if (weaponProficiency == "Simple") {
+            if (weaponRange == "Melee") {// Simple Melee
+                resources.getStringArray(R.array.sa_weaponSimpleProficiencyMelee)
+            } else {// Simple Ranged
+                resources.getStringArray(R.array.sa_weaponSimpleProficiencyRanged)
             }
-            else
-            {// Simple Ranged
-                proficiencyArray = resources.getStringArray(R.array.sa_weaponSimpleProficiencyRanged)
-            }
-        }
-        else
-        {
-            if (weaponRange == "Melee")
-            {// Martial Melee
-                proficiencyArray = resources.getStringArray(R.array.sa_weaponMartialProficiencyMelee)
-            }
-            else
-            {// Martial Ranged
-                proficiencyArray = resources.getStringArray(R.array.sa_weaponMartialProficiencyRanged)
+        } else {
+            if (weaponRange == "Melee") {// Martial Melee
+                resources.getStringArray(R.array.sa_weaponMartialProficiencyMelee)
+            } else {// Martial Ranged
+                resources.getStringArray(R.array.sa_weaponMartialProficiencyRanged)
             }
         }
 
-        spnr_weapons_proficiency.setSelection(proficiencyArray.indexOf(value.proficiency))
+        spnrWeaponsProficiency.setSelection(proficiencyArray.indexOf(value.proficiency))
         value.damage?.let {
             damageArrayList.clear()
             damageArrayList.addAll(it.toMutableList())
@@ -180,14 +164,14 @@ class WeaponEditTile @JvmOverloads constructor(
         damageAdapter.notifyDataSetChanged()
     }
 
-    public fun getValue(): WeaponData {
+    fun getValue(): WeaponData {
         val iId = ViewModel.item
-        return WeaponData(iId, weaponProficiency, weaponRange, spnr_weapons_proficiency.selectedItem.toString(), damageArrayList)
+        return WeaponData(iId, weaponProficiency, weaponRange, spnrWeaponsProficiency.selectedItem.toString(), damageArrayList)
     }
 
     private fun updateWeaponsProficiency(proficiency: String, range: String)
     {
-        spnr_weapons_proficiency.let {
+        spnrWeaponsProficiency.let {
             if (proficiency == "Simple")
             {
                 if (range == "Melee")
@@ -196,7 +180,7 @@ class WeaponEditTile @JvmOverloads constructor(
                         context,
                         android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_weaponSimpleProficiencyMelee)
                     )
-                    it!!.adapter = adapter
+                    it.adapter = adapter
                 }
                 else
                 {// Simple Ranged
@@ -204,7 +188,7 @@ class WeaponEditTile @JvmOverloads constructor(
                         context,
                         android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_weaponSimpleProficiencyRanged)
                     )
-                    it!!.adapter = adapter
+                    it.adapter = adapter
                 }
             }
             else
@@ -215,7 +199,7 @@ class WeaponEditTile @JvmOverloads constructor(
                         context,
                         android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_weaponMartialProficiencyMelee)
                     )
-                    it!!.adapter = adapter
+                    it.adapter = adapter
                 }
                 else
                 {// Martial Ranged
@@ -223,7 +207,7 @@ class WeaponEditTile @JvmOverloads constructor(
                         context,
                         android.R.layout.simple_spinner_item, resources.getStringArray(R.array.sa_weaponMartialProficiencyRanged)
                     )
-                    it!!.adapter = adapter
+                    it.adapter = adapter
                 }
             }
         }

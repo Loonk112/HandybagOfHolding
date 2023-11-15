@@ -17,10 +17,10 @@ class WeaponInfoTile @JvmOverloads constructor(
 ) : MaterialCardView(context, attributeSet, defaultStyleAttribute) {
 
 
-    private val tv_itemGroup: TextView
-    private val tv_itemProficiency: TextView
-    private val tv_itemRange: TextView
-    private val rv_itemDamage: RecyclerView
+    private val tvItemGroup: TextView
+    private val tvItemProficiency: TextView
+    private val tvItemRange: TextView
+    private val rvItemDamage: RecyclerView
 
     private val damageAdapter: ItemDamageAdapter
     private var damageArrayList: ArrayList<ItemDamageData>
@@ -28,18 +28,18 @@ class WeaponInfoTile @JvmOverloads constructor(
     init {
         inflate(context, R.layout.weapons_info_tile, this)
 
-        tv_itemGroup = findViewById(R.id.tv_itemGroup)
-        tv_itemProficiency = findViewById(R.id.tv_itemProficiency)
-        tv_itemRange = findViewById(R.id.tv_itemRange)
-        rv_itemDamage = findViewById(R.id.rv_itemDamage)
+        tvItemGroup = findViewById(R.id.tv_itemGroup)
+        tvItemProficiency = findViewById(R.id.tv_itemProficiency)
+        tvItemRange = findViewById(R.id.tv_itemRange)
+        rvItemDamage = findViewById(R.id.rv_itemDamage)
 
 
-        rv_itemDamage.layoutManager = object: LinearLayoutManager(context) { override fun canScrollVertically() = false }
+        rvItemDamage.layoutManager = object: LinearLayoutManager(context) { override fun canScrollVertically() = false }
 
-        damageArrayList = ArrayList<ItemDamageData>()
+        damageArrayList = ArrayList()
         damageAdapter = ItemDamageAdapter(damageArrayList, context)
         damageAdapter.canRemoveItems = false
-        rv_itemDamage.adapter = damageAdapter
+        rvItemDamage.adapter = damageAdapter
 
         getItemInfo()
 
@@ -60,24 +60,23 @@ class WeaponInfoTile @JvmOverloads constructor(
                 return@addSnapshotListener
             }
             Log.d("WeaponInfoTile", "$snapshot")
-            if (snapshot != null && snapshot.exists())
-            {
-                rv_itemDamage.suppressLayout(false)
+            if (snapshot != null && snapshot.exists()) {
+                rvItemDamage.suppressLayout(false)
 
                 damageArrayList.clear()
                 snapshot.toObject<WeaponData>()?.let {
-                    tv_itemGroup.text = it.group
-                    tv_itemProficiency.text = it.proficiency
-                    tv_itemRange.text = it.range
-                    it.damage.let { it ->
-                        it!!.forEach { it ->
-                            damageArrayList.add(it)
+                    tvItemGroup.text = it.group
+                    tvItemProficiency.text = it.proficiency
+                    tvItemRange.text = it.range
+                    it.damage.let { damageList ->
+                        damageList!!.forEach { damage ->
+                            damageArrayList.add(damage)
                         }
                     }
-                    Log.d("WeaponInfoTile", "${damageArrayList}")
+                    Log.d("WeaponInfoTile", "$damageArrayList")
                 }
                 damageAdapter.notifyDataSetChanged()
-                rv_itemDamage.suppressLayout(true)
+                rvItemDamage.suppressLayout(true)
             }
         }
     }

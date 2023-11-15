@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
@@ -34,33 +33,33 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val et_email = findViewById<EditText>(R.id.et_email)
-        val et_password = findViewById<EditText>(R.id.et_password)
-        val b_login = findViewById<Button>(R.id.b_loginConfirm)
-        val tv_register = findViewById<TextView>(R.id.tv_register)
+        val etEmail = findViewById<EditText>(R.id.et_email)
+        val etPassword = findViewById<EditText>(R.id.et_password)
+        val bLogin = findViewById<Button>(R.id.b_loginConfirm)
+        val tvRegister = findViewById<TextView>(R.id.tv_register)
 
-        tv_register.setOnClickListener {
+        tvRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        b_login.setOnClickListener {
+        bLogin.setOnClickListener {
             when{
-                TextUtils.isEmpty(et_email.text.toString().trim {it <= ' '}) ->
+                TextUtils.isEmpty(etEmail.text.toString().trim {it <= ' '}) ->
                 {
                     Toast.makeText(this@LoginActivity, "Email can not be empty.", Toast.LENGTH_SHORT).show()
                 }
 
-                TextUtils.isEmpty(et_password.text.toString().trim {it <= ' '}) ->
+                TextUtils.isEmpty(etPassword.text.toString().trim {it <= ' '}) ->
                 {
                     Toast.makeText(this@LoginActivity, "Password can not be empty.", Toast.LENGTH_SHORT).show()
                 }
 
                 else ->
                 {
-                    val email: String = et_email.text.toString().trim { it <= ' '}
-                    val password: String = et_password.text.toString().trim { it <= ' '}
+                    val email: String = etEmail.text.toString().trim { it <= ' '}
+                    val password: String = etPassword.text.toString().trim { it <= ' '}
 
                     ViewModel.auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                         if (task.isSuccessful)

@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.EditText
 import android.widget.LinearLayout
-import com.google.android.material.card.MaterialCardView
 
 class NoteEditTile @JvmOverloads constructor(
     context: Context,
@@ -13,24 +12,24 @@ class NoteEditTile @JvmOverloads constructor(
 ) : LinearLayout(context, attributeSet, defaultStyleAttribute) {
 
 
-    private val et_itemNotes: EditText
+    private val etItemNotes: EditText
 
     init {
         inflate(context, R.layout.note_edit_tile, this)
 
-        et_itemNotes = findViewById(R.id.et_itemNotes)
+        etItemNotes = findViewById(R.id.et_itemNotes)
     }
 
-    public fun setValue(value: String) {
-        et_itemNotes.setText(value)
+    fun setValue(value: String) {
+        etItemNotes.setText(value)
     }
 
-    public fun getValue(): HashMap<*, String>? {
+    fun getValue(): HashMap<*, String>? {
 
-        if (et_itemNotes.text.isBlank()) return null
+        if (etItemNotes.text.isBlank()) return null
 
 
-        val stringOut = et_itemNotes.text.toString().trim().trimIndent()
+        val stringOut = etItemNotes.text.toString().trim().trimIndent()
 
         return hashMapOf(
             "note" to stringOut

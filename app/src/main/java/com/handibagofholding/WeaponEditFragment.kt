@@ -13,13 +13,10 @@ import com.google.firebase.firestore.ktx.toObject
 
 class WeaponEditFragment : Fragment() {
 
-    lateinit var editTile: WeaponEditTile
-    lateinit var b_editCancel: Button
-    lateinit var b_editConfirm: Button
+    private lateinit var editTile: WeaponEditTile
+    private lateinit var bEditCancel: Button
+    private lateinit var bEditConfirm: Button
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,9 +25,9 @@ class WeaponEditFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_weapon_edit, container, false)
 
-        editTile = view.findViewById<WeaponEditTile>(R.id.editTile)
-        b_editCancel = view.findViewById<Button>(R.id.b_editCancel)
-        b_editConfirm = view.findViewById<Button>(R.id.b_editConfirm)
+        editTile = view.findViewById(R.id.editTile)
+        bEditCancel = view.findViewById(R.id.b_editCancel)
+        bEditConfirm = view.findViewById(R.id.b_editConfirm)
 
         return view
     }
@@ -50,11 +47,11 @@ class WeaponEditFragment : Fragment() {
             Log.e("WeaponEditFragment", "Error getting data", it)
         }
 
-        b_editCancel.setOnClickListener {
+        bEditCancel.setOnClickListener {
             view.findNavController().navigateUp()
         }
 
-        b_editConfirm.setOnClickListener {
+        bEditConfirm.setOnClickListener {
 
             ViewModel.db.collection("weapons").document(ViewModel.item).set(editTile.getValue()).addOnSuccessListener {
                 context?.let {

@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:text="Notes"
+        android:text="@string/notes"
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -15,13 +15,14 @@
 
     <EditText
         android:id="@+id/et_itemNotes"
-        android:hint="Notes"
+        android:hint="@string/notes"
         android:gravity="center"
         android:minLines="2"
         android:inputType="textMultiLine"
         android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:importantForAutofill="no" />
 
 </LinearLayout>

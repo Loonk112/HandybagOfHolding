@@ -9,17 +9,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.navigation.findNavController
-import com.google.firebase.firestore.ktx.toObject
 
 class NoteEditFragment : Fragment() {
 
-    lateinit var editTile: NoteEditTile
-    lateinit var b_editCancel: Button
-    lateinit var b_editConfirm: Button
+    private lateinit var editTile: NoteEditTile
+    private lateinit var bEditCancel: Button
+    private lateinit var bEditConfirm: Button
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,9 +24,9 @@ class NoteEditFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_note_edit, container, false)
 
-        editTile = view.findViewById<NoteEditTile>(R.id.editTile)
-        b_editCancel = view.findViewById<Button>(R.id.b_editCancel)
-        b_editConfirm = view.findViewById<Button>(R.id.b_editConfirm)
+        editTile = view.findViewById(R.id.editTile)
+        bEditCancel = view.findViewById(R.id.b_editCancel)
+        bEditConfirm = view.findViewById(R.id.b_editConfirm)
 
         return view
     }
@@ -41,7 +37,7 @@ class NoteEditFragment : Fragment() {
         ViewModel.db.collection("notes").document(ViewModel.item).get().addOnSuccessListener {snapshot ->
             if (snapshot != null && snapshot.exists())
             {
-                snapshot.getString("note")?.let {it ->
+                snapshot.getString("note")?.let {
                     editTile.setValue(it)
                 }
             }
@@ -50,11 +46,11 @@ class NoteEditFragment : Fragment() {
             Log.e("NoteEditFragment", "Error getting data", it)
         }
 
-        b_editCancel.setOnClickListener {
+        bEditCancel.setOnClickListener {
             view.findNavController().navigateUp()
         }
 
-        b_editConfirm.setOnClickListener {
+        bEditConfirm.setOnClickListener {
 
             if (editTile.getValue() != null) {
 
@@ -63,8 +59,8 @@ class NoteEditFragment : Fragment() {
                         context?.let {
                             Toast.makeText(it, "Item edited.", Toast.LENGTH_SHORT).show()
                         }
-                    }.addOnFailureListener {
-                    Log.e("NoteEditFragment", "Error passing data", it)
+                    }.addOnFailureListener {er ->
+                    Log.e("NoteEditFragment", "Error passing data", er)
                     context?.let {
                         Toast.makeText(
                             it,

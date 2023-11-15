@@ -99,6 +99,35 @@
         <item>d12</item>
         <item>d20</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="items">Items</string>
+    <string name="all">all</string>
+    <string name="weapons">weapons</string>
+    <string name="armour">armour</string>
+    <string name="consumables">consumables</string>
+    <string name="other">other</string>
+    <string name="add_new_item">Add new item</string>
+    <string name="return_to_previous_view">Return to previous view</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="item_category">Item Category</string>
+    <string name="item_name">Item Name</string>
+    <string name="damage_type">Damage type</string>
+    <string name="dice_count">Dice count</string>
+    <string name="damage_dice">Damage Dice</string>
+    <string name="notes">Notes</string>
+    <string name="long_press_to_edit_notes">Long press to edit notes</string>
+    <string name="proficiency_group">Proficiency Group</string>
+    <string name="simple">Simple</string>
+    <string name="martial">Martial</string>
+    <string name="weapon_range">Weapon Range</string>
+    <string name="melee">Melee</string>
+    <string name="ranged">Ranged</string>
+    <string name="weapon_proficiency">Weapon Proficiency</string>
+    <string name="weapon_damage">Weapon Damage</string>
+    <string name="count">Count</string>
+    <string name="add_damage">Add damage</string>
+    <string name="long_press_to_remove_damage">Long press to remove damage</string>
+    <string name="group">Group</string>
+    <string name="range">Range</string>
+    <string name="proficiency">Proficiency</string>
 </resources>

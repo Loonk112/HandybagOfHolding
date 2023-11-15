@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:text="Notes"
+            android:text="@string/notes"
             android:textSize="20sp"
             android:textAlignment="center"
             android:textStyle="bold"
@@ -25,8 +25,8 @@
 
         <TextView
             android:id="@+id/tv_note"
-            android:text="Long press to edit notes"
-            android:textSize="15sp"
+            android:text="@string/long_press_to_edit_notes"
+            android:textSize="11sp"
             android:textAlignment="center"
             android:paddingBottom="5dp"
             android:layout_width="match_parent"
