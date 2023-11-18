@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0px"
         android:fillViewport="true">
-        <com.handibagofholding.ArmourEditTile
+        <com.handybagofholding.ArmourEditTile
             android:id="@+id/editTile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -26,20 +26,22 @@
         app:layout_constraintBottom_toBottomOf="parent">
         <Button
             android:id="@+id/b_editCancel"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textSize="20sp"
             android:layout_margin="5dp"
             android:layout_width="0px"
             android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            style="?android:attr/buttonBarButtonStyle" />
         <Button
             android:id="@+id/b_editConfirm"
-            android:text="Confirm"
+            android:text="@string/confirm"
             android:textSize="20sp"
             android:layout_margin="5dp"
             android:layout_width="0px"
             android:layout_weight="1"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            style="?android:attr/buttonBarButtonStyle" />
     </LinearLayout>
     
 </androidx.constraintlayout.widget.ConstraintLayout>

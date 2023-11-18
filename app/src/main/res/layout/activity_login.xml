@@ -27,11 +27,12 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:contentDescription="@string/handybag_of_holding_logo" />
 
             <EditText
                 android:id="@+id/et_email"
-                android:hint="E-mail"
+                android:hint="@string/e_mail"
                 android:textSize="20sp"
                 android:inputType="textEmailAddress"
                 android:layout_width="match_parent"
@@ -40,7 +41,7 @@
 
             <EditText
                 android:id="@+id/et_password"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:textSize="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,7 +52,7 @@
 
     <Button
         android:id="@+id/b_loginConfirm"
-        android:text="Login"
+        android:text="@string/login"
         android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Don't have an account?"
+            android:text="@string/don_t_have_an_account"
             android:textSize="15sp"
             android:gravity="center" />
 
@@ -79,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Register!"
+            android:text="@string/register_exclamation"
             android:textSize="15sp"
             android:gravity="center" />
     </LinearLayout>

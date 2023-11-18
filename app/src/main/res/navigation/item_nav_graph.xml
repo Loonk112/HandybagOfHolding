@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/itemFragment"
-        android:name="com.handibagofholding.ItemFragment"
+        android:name="com.handybagofholding.ItemFragment"
         android:label="fragment_item"
         tools:layout="@layout/fragment_item" >
         <action
@@ -25,22 +25,22 @@
     </fragment>
     <fragment
         android:id="@+id/itemEditFragment"
-        android:name="com.handibagofholding.ItemEditFragment"
+        android:name="com.handybagofholding.ItemEditFragment"
         android:label="fragment_item_edit"
         tools:layout="@layout/fragment_item_edit" />
     <fragment
         android:id="@+id/weaponEditFragment"
-        android:name="com.handibagofholding.WeaponEditFragment"
+        android:name="com.handybagofholding.WeaponEditFragment"
         android:label="fragment_weapon_edit"
         tools:layout="@layout/fragment_weapon_edit" />
     <fragment
         android:id="@+id/armourEditFragment"
-        android:name="com.handibagofholding.ArmourEditFragment"
+        android:name="com.handybagofholding.ArmourEditFragment"
         android:label="fragment_armour_edit"
         tools:layout="@layout/fragment_armour_edit" />
     <fragment
         android:id="@+id/noteEditFragment"
-        android:name="com.handibagofholding.NoteEditFragment"
+        android:name="com.handybagofholding.NoteEditFragment"
         android:label="fragment_note_edit"
         tools:layout="@layout/fragment_note_edit" />
 </navigation>

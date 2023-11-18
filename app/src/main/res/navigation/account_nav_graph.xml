@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/charactersFragment"
-        android:name="com.handibagofholding.CharactersFragment"
+        android:name="com.handybagofholding.CharactersFragment"
         android:label="fragment_characters"
         tools:layout="@layout/fragment_characters" >
         <action
@@ -16,12 +16,12 @@
     </fragment>
     <fragment
         android:id="@+id/characterAddFragment"
-        android:name="com.handibagofholding.CharacterAddFragment"
+        android:name="com.handybagofholding.CharacterAddFragment"
         android:label="fragment_character_add"
         tools:layout="@layout/fragment_character_add" />
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.handibagofholding.AccountFragment"
+        android:name="com.handybagofholding.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" />
 </navigation>

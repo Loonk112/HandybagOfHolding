@@ -122,7 +122,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_weapons_damageDisplay"
-        tools:listitem="@layout/item_damage_layout"
+        tools:listitem="@layout/layout_item_damage"
         android:layout_marginHorizontal="10dp"
         android:layout_marginBottom="0dp"
         android:layout_width="match_parent"
