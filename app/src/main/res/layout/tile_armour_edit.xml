@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:text="Armour Class"
+        android:text="@string/armour_class"
         android:gravity="center"
         android:textSize="20sp"
         android:layout_margin="5dp"
@@ -14,7 +14,7 @@
 
     <EditText
         android:id="@+id/et_ac"
-        android:hint="AC"
+        android:hint="@string/ac"
         android:textSize="20sp"
         android:inputType="number"
         android:layout_margin="10dp"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:text="Proficiency"
+                android:text="@string/proficiency"
                 android:gravity="center"
                 android:textSize="20sp"
                 android:layout_width="match_parent"
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:text="Equip Slot"
+                android:text="@string/equip_slot"
                 android:gravity="center"
                 android:textSize="20sp"
                 android:layout_width="match_parent"

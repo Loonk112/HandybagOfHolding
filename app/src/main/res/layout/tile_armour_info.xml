@@ -16,7 +16,7 @@
             android:layout_weight="1">
             <TextView
                 android:id="@+id/tv_itemAC"
-                android:text="AC Count"
+                android:text="@string/ac_count"
                 android:layout_width="0px"
                 android:layout_weight="1"
                 android:textSize="20sp"
@@ -24,7 +24,7 @@
                 android:textStyle="bold"
                 android:padding="5dp"/>
             <TextView
-                android:text="AC"
+                android:text="@string/ac"
                 android:layout_width="0px"
                 android:layout_weight="1"
                 android:textSize="20sp"
@@ -36,19 +36,19 @@
             android:layout_weight="1">
             <TextView
                 android:id="@+id/tv_itemProficiency"
-                android:text="Proficiency"
+                android:text="@string/proficiency"
                 android:layout_width="0px"
                 android:layout_weight="1"
-                android:textSize="10sp"
+                android:textSize="11sp"
                 android:textAlignment="viewEnd"
                 android:textStyle="italic"
                 android:padding="5dp"/>
             <TextView
                 android:id="@+id/tv_itemSlot"
-                android:text="Slot"
+                android:text="@string/slot"
                 android:layout_width="0px"
                 android:layout_weight="1"
-                android:textSize="10sp"
+                android:textSize="11sp"
                 android:textAlignment="viewStart"
                 android:textStyle="italic"
                 android:padding="5dp"/>
