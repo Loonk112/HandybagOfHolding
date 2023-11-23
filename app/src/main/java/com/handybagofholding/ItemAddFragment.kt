@@ -155,7 +155,7 @@ class ItemAddFragment : Fragment() {
 
                         if (noteEditTile.getValue() != null) {
                             val note = noteEditTile.getValue()!!
-                            transaction.set(db.collection("notes").document(iId), note)
+                            transaction.set(db.collection("item_notes").document(iId), note)
                         }
 
 

@@ -36,15 +36,20 @@ class CharacterAdapter (private val characterList: ArrayList<CharacterMetaData>,
         holder.myItemView.setOnLongClickListener {
             AlertDialog(activityContext).show("You are about to delete ${characterViewModel.name}.\nIt is irreversible.\nAre you sure?"){
                 if (it == AlertDialog.ResponseType.YES) {
-                    Log.d("AlertDialog", "YES")
-                    ViewModel.db.collection("characters").document(characterViewModel.id)
-                        .delete()
-                        .addOnSuccessListener {
-                            Log.d("Firebase", "Character was deleted")
-                            Toast.makeText(activityContext, "${characterViewModel.name} was deleted.", Toast.LENGTH_SHORT).show()
 
-                        }
-                        .addOnFailureListener { e -> Log.w("Firebase", "Error deleting document", e) }
+                    ViewModel.db.runTransaction { transaction ->
+
+                        transaction.delete(ViewModel.db.collection("characters").document(characterViewModel.id))
+                        transaction.delete(ViewModel.db.collection("character_notes").document(characterViewModel.id))
+
+                    }.addOnSuccessListener {
+                        Log.d("Firebase", "Item was deleted")
+                        Toast.makeText(activityContext, "${characterViewModel.name} was deleted.", Toast.LENGTH_SHORT).show()
+                    }.addOnFailureListener { e ->
+                        Log.w("Firebase", "Error deleting document", e)
+                        Toast.makeText(activityContext, "${characterViewModel.name} was NOT deleted!", Toast.LENGTH_SHORT).show()
+                    }
+
                 }
             }
             true

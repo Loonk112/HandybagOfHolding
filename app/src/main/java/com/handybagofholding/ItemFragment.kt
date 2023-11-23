@@ -16,7 +16,7 @@ class ItemFragment : Fragment() {
     private lateinit var dataList: LinearLayout
     private lateinit var ibReturn: ImageButton
     private lateinit var itemInfo: ItemInfoTile
-    private lateinit var noteInfo: NoteInfoTile
+    private lateinit var noteInfo: ItemNoteInfoTile
 
     private var weaponInfoTile: WeaponInfoTile? = null
     private var armourInfo: ArmourInfoTile? = null
@@ -60,7 +60,7 @@ class ItemFragment : Fragment() {
             }
         }
 
-        noteInfo = NoteInfoTile(requireContext())
+        noteInfo = ItemNoteInfoTile(requireContext())
         dataList.addView(noteInfo)
 
         return view

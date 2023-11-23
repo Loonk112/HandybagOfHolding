@@ -26,7 +26,7 @@
         <TextView
             android:id="@+id/tv_note"
             android:text="@string/long_press_to_edit_notes"
-            android:textSize="11sp"
+            android:textSize="15sp"
             android:textAlignment="center"
             android:paddingBottom="5dp"
             android:layout_width="match_parent"

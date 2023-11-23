@@ -51,7 +51,7 @@ class ItemAdapter (private val itemList: ArrayList<ItemMetaData>, private val ac
 
                         transaction.delete(ViewModel.db.collection("items").document(itemViewModel.id))
                         transaction.delete(ViewModel.db.collection(itemViewModel.category).document(itemViewModel.id))
-                        transaction.delete(ViewModel.db.collection("notes").document(itemViewModel.id))
+                        transaction.delete(ViewModel.db.collection("item_notes").document(itemViewModel.id))
 
                     }.addOnSuccessListener {
                         Log.d("Firebase", "Item was deleted")

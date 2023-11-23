@@ -20,7 +20,7 @@
             android:id="@+id/action_itemFragment_to_armourEditFragment"
             app:destination="@id/armourEditFragment" />
         <action
-            android:id="@+id/action_itemFragment_to_noteEditFragment"
+            android:id="@+id/action_itemFragment_to_itemNoteEditFragment"
             app:destination="@id/noteEditFragment" />
     </fragment>
     <fragment
@@ -40,7 +40,7 @@
         tools:layout="@layout/fragment_armour_edit" />
     <fragment
         android:id="@+id/noteEditFragment"
-        android:name="com.handybagofholding.NoteEditFragment"
+        android:name="com.handybagofholding.ItemNoteEditFragment"
         android:label="fragment_note_edit"
-        tools:layout="@layout/fragment_note_edit" />
+        tools:layout="@layout/fragment_item_note_edit" />
 </navigation>

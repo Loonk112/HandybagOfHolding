@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.navigation.findNavController
 
-class NoteEditFragment : Fragment() {
+class ItemNoteEditFragment : Fragment() {
 
     private lateinit var editTile: NoteEditTile
     private lateinit var bEditCancel: Button
@@ -22,7 +22,7 @@ class NoteEditFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_note_edit, container, false)
+        val view = inflater.inflate(R.layout.fragment_item_note_edit, container, false)
 
         editTile = view.findViewById(R.id.editTile)
         bEditCancel = view.findViewById(R.id.b_editCancel)
@@ -34,16 +34,16 @@ class NoteEditFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ViewModel.db.collection("notes").document(ViewModel.item).get().addOnSuccessListener {snapshot ->
+        ViewModel.db.collection("item_notes").document(ViewModel.item).get().addOnSuccessListener {snapshot ->
             if (snapshot != null && snapshot.exists())
             {
                 snapshot.getString("note")?.let {
                     editTile.setValue(it)
                 }
             }
-            Log.d("NoteEditFragment", "Success in getting data")
+            Log.d("ItemNoteEditFragment", "Success in getting data")
         }.addOnFailureListener{
-            Log.e("NoteEditFragment", "Error getting data", it)
+            Log.e("ItemNoteEditFragment", "Error getting data", it)
         }
 
         bEditCancel.setOnClickListener {
@@ -54,13 +54,13 @@ class NoteEditFragment : Fragment() {
 
             if (editTile.getValue() != null) {
 
-                ViewModel.db.collection("notes").document(ViewModel.item).set(editTile.getValue()!!)
+                ViewModel.db.collection("item_notes").document(ViewModel.item).set(editTile.getValue()!!)
                     .addOnSuccessListener {
                         context?.let {
                             Toast.makeText(it, "Item edited.", Toast.LENGTH_SHORT).show()
                         }
                     }.addOnFailureListener {er ->
-                    Log.e("NoteEditFragment", "Error passing data", er)
+                    Log.e("ItemNoteEditFragment", "Error passing data", er)
                     context?.let {
                         Toast.makeText(
                             it,

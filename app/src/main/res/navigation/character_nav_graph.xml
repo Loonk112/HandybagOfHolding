@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_characterDetailsFragment_to_characterEditFragment"
             app:destination="@id/characterEditFragment" />
+        <action
+            android:id="@+id/action_characterDetailsFragment_to_characterNoteEditFragment"
+            app:destination="@id/characterNoteEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemAddFragment"
@@ -33,4 +36,9 @@
         android:name="com.handybagofholding.CharacterEditFragment"
         android:label="fragment_character_edit"
         tools:layout="@layout/fragment_character_edit" />
+    <fragment
+        android:id="@+id/characterNoteEditFragment"
+        android:name="com.handybagofholding.CharacterNoteEditFragment"
+        android:label="fragment_character_note_edit"
+        tools:layout="@layout/fragment_character_note_edit" />
 </navigation>

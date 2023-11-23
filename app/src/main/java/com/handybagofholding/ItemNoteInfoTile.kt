@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import com.google.android.material.card.MaterialCardView
 
-class NoteInfoTile @JvmOverloads constructor(
+class ItemNoteInfoTile @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
     defaultStyleAttribute: Int = 0
@@ -24,8 +24,8 @@ class NoteInfoTile @JvmOverloads constructor(
         getItemInfo()
 
         this.setOnLongClickListener {
-            Log.d("NoteInfoTile", "Long click detected")
-            findNavController().navigate(R.id.action_itemFragment_to_noteEditFragment)
+            Log.d("ItemNoteInfoTile", "Long click detected")
+            findNavController().navigate(R.id.action_itemFragment_to_itemNoteEditFragment)
             true
         }
 
@@ -34,12 +34,12 @@ class NoteInfoTile @JvmOverloads constructor(
     private fun getItemInfo() {
         val iId = ViewModel.item
 
-        ViewModel.db.collection("notes").document(iId).addSnapshotListener { snapshot, e ->
+        ViewModel.db.collection("item_notes").document(iId).addSnapshotListener { snapshot, e ->
             if (e != null) {
-                Log.e("NoteInfoTile", "Listen failed.", e)
+                Log.e("ItemNoteInfoTile", "Listen failed.", e)
                 return@addSnapshotListener
             }
-            Log.d("NoteInfoTile", "$snapshot")
+            Log.d("ItemNoteInfoTile", "$snapshot")
             if (snapshot != null && snapshot.exists())
             {
                 (snapshot.get("note") as String).let {
