@@ -7,7 +7,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.firestore.toObject
 
 class ConsumableInfoTile @JvmOverloads constructor(
     context: Context,

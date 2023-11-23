@@ -6,7 +6,7 @@ import android.util.Log
 import android.widget.TextView
 import androidx.navigation.findNavController
 import com.google.android.material.card.MaterialCardView
-import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.firestore.toObject
 
 class ArmourInfoTile @JvmOverloads constructor(
     context: Context,

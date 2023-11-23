@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.findNavController
-import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.firestore.toObject
 
 
 class ItemEditFragment : Fragment() {

@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
-import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.firestore.toObject
 
 class ItemFragment : Fragment() {
 
