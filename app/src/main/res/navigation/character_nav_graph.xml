@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/itemsFragment"
-        android:name="com.handybagofholding.ItemsFragment"
+        android:name="com.handybagofholding.fragment.ItemsFragment"
         android:label="fragment_items"
         tools:layout="@layout/fragment_items" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/characterDetailsFragment"
-        android:name="com.handybagofholding.CharacterDetailsFragment"
+        android:name="com.handybagofholding.fragment.CharacterDetailsFragment"
         android:label="fragment_character_details"
         tools:layout="@layout/fragment_character_details" >
         <action
@@ -25,20 +25,28 @@
         <action
             android:id="@+id/action_characterDetailsFragment_to_characterNoteEditFragment"
             app:destination="@id/characterNoteEditFragment" />
+        <action
+            android:id="@+id/action_characterDetailsFragment_to_abilityScoreEditFragment"
+            app:destination="@id/abilityScoreEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemAddFragment"
-        android:name="com.handybagofholding.ItemAddFragment"
+        android:name="com.handybagofholding.fragment.ItemAddFragment"
         android:label="fragment_item_add"
         tools:layout="@layout/fragment_item_add" />
     <fragment
         android:id="@+id/characterEditFragment"
-        android:name="com.handybagofholding.CharacterEditFragment"
+        android:name="com.handybagofholding.fragment.CharacterEditFragment"
         android:label="fragment_character_edit"
         tools:layout="@layout/fragment_character_edit" />
     <fragment
         android:id="@+id/characterNoteEditFragment"
-        android:name="com.handybagofholding.CharacterNoteEditFragment"
+        android:name="com.handybagofholding.fragment.CharacterNoteEditFragment"
         android:label="fragment_character_note_edit"
         tools:layout="@layout/fragment_character_note_edit" />
+    <fragment
+        android:id="@+id/abilityScoreEditFragment"
+        android:name="com.handybagofholding.fragment.AbilityScoreEditFragment"
+        android:label="fragment_ability_score_edit"
+        tools:layout="@layout/fragment_ability_score_edit" />
 </navigation>

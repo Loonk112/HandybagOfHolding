@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.handybagofholding.data.ItemDamageData
 
+@Suppress("unused")
 class ItemDamageAdapter (private val damageList: ArrayList<ItemDamageData>, private val activityContext: Context): RecyclerView.Adapter<ItemDamageAdapter.ViewHolder>() {
 
     var canRemoveItems: Boolean = true

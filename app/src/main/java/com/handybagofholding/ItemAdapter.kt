@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.handybagofholding.activity.ItemActivity
+import com.handybagofholding.data.ItemMetaData
 
 class ItemAdapter (private val itemList: ArrayList<ItemMetaData>, private val activityContext: Context): RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 

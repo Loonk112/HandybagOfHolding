@@ -168,4 +168,11 @@
     <string name="increase_value">Increase value</string>
     <string name="armour_class">Armour Class</string>
     <string name="equip_slot">Equip Slot</string>
+    <string name="str">Str</string>
+    <string name="con">Con</string>
+    <string name="dex">Dex</string>
+    <string name="txt_int">Int</string>
+    <string name="wis">Wis</string>
+    <string name="chr">Chr</string>
+    <string name="ability_scores">Ability Scores</string>
 </resources>

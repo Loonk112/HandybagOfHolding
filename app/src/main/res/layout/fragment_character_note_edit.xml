@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CharacterNoteEditFragment">
+    tools:context=".fragment.CharacterNoteEditFragment">
 
     <ScrollView
         app:layout_constraintTop_toTopOf="parent"
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0px"
         android:fillViewport="true">
-        <com.handybagofholding.NoteEditTile
+        <com.handybagofholding.tile.NoteEditTile
             android:id="@+id/editTile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

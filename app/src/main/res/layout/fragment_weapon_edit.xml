@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".WeaponEditFragment">
+    tools:context=".fragment.WeaponEditFragment">
 
     <ScrollView
         app:layout_constraintTop_toTopOf="parent"
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0px"
         android:fillViewport="true">
-        <com.handybagofholding.WeaponEditTile
+        <com.handybagofholding.tile.WeaponEditTile
             android:id="@+id/editTile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.handybagofholding.activity.CharacterActivity
+import com.handybagofholding.data.CharacterMetaData
 
 class CharacterAdapter (private val characterList: ArrayList<CharacterMetaData>, private val activityContext: Context): RecyclerView.Adapter<CharacterAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
@@ -40,6 +42,7 @@ class CharacterAdapter (private val characterList: ArrayList<CharacterMetaData>,
                     ViewModel.db.runTransaction { transaction ->
 
                         transaction.delete(ViewModel.db.collection("characters").document(characterViewModel.id))
+                        transaction.delete(ViewModel.db.collection("ability_scores").document(characterViewModel.id))
                         transaction.delete(ViewModel.db.collection("character_notes").document(characterViewModel.id))
 
                     }.addOnSuccessListener {

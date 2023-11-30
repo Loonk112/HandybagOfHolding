@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ItemAddFragment">
+    tools:context=".fragment.ItemAddFragment">
 
     <LinearLayout
         android:id="@+id/ll_topBar"
@@ -42,7 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:inputType="text" />
+                android:inputType="text"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:text="@string/category"
@@ -63,14 +64,14 @@
             <!-- Weapons !-->
 
 
-            <com.handybagofholding.WeaponEditTile
+            <com.handybagofholding.tile.WeaponEditTile
                 android:id="@+id/weaponEditTile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <!-- Armour !-->
 
-            <com.handybagofholding.ArmourEditTile
+            <com.handybagofholding.tile.ArmourEditTile
                 android:id="@+id/armourEditTile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -91,7 +92,7 @@
 
             <!-- Notes !-->
 
-            <com.handybagofholding.NoteEditTile
+            <com.handybagofholding.tile.NoteEditTile
                 android:id="@+id/noteEditTile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

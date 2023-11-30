@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ItemFragment"
+    tools:context=".fragment.ItemFragment"
     android:orientation="vertical">
 
     <LinearLayout
@@ -44,7 +44,7 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <com.handybagofholding.ItemInfoTile
+            <com.handybagofholding.tile.ItemInfoTile
                 android:id="@+id/itemInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
