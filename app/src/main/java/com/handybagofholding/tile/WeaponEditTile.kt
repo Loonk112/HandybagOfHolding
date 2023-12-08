@@ -43,7 +43,7 @@ class WeaponEditTile @JvmOverloads constructor(
 
 
     init {
-        inflate(context, R.layout.weapon_edit_tile, this)
+        inflate(context, R.layout.tile_weapon_edit, this)
 
         rgWeaponsProficiencyGroup = findViewById(R.id.rg_weapons_proficiencyGroup)
         rgWeaponsRange = findViewById(R.id.rg_weapons_range)

@@ -32,7 +32,7 @@ class WeaponInfoTile @JvmOverloads constructor(
     private var damageArrayList: ArrayList<ItemDamageData>
 
     init {
-        inflate(context, R.layout.weapons_info_tile, this)
+        inflate(context, R.layout.tile_weapons_info, this)
 
         tvItemGroup = findViewById(R.id.tv_itemGroup)
         tvItemProficiency = findViewById(R.id.tv_itemProficiency)

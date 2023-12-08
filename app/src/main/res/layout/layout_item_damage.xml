@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:gravity="center"
     android:background="?attr/selectableItemBackground">
 
     <TextView
@@ -10,7 +11,7 @@
         android:text="@string/damage_type"
         android:layout_margin="5dp"
         android:textSize="15sp"
-        android:layout_width="wrap_content"
+        android:layout_width="0px"
         android:layout_weight="3"
         android:layout_height="wrap_content"/>
 
@@ -19,7 +20,7 @@
         android:text="@string/dice_count"
         android:layout_margin="5dp"
         android:textSize="15sp"
-        android:layout_width="wrap_content"
+        android:layout_width="0px"
         android:layout_weight="1"
         android:layout_height="wrap_content"/>
 
@@ -28,7 +29,7 @@
         android:text="@string/damage_dice"
         android:layout_margin="5dp"
         android:textSize="15sp"
-        android:layout_width="wrap_content"
+        android:layout_width="0px"
         android:layout_weight="2"
         android:layout_height="wrap_content"/>
 

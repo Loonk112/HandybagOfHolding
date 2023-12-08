@@ -23,11 +23,11 @@
             <ImageView
                 android:id="@+id/iv_logo"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_launcher_background"
+                android:src="@drawable/icon"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_marginVertical="20dp"
                 android:contentDescription="@string/handybag_of_holding_logo" />
 
             <EditText
