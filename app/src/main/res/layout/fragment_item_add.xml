@@ -54,6 +54,7 @@
                 android:layout_height="wrap_content"/>
 
             <Spinner
+                android:minHeight="48dp"
                 android:id="@+id/spnr_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

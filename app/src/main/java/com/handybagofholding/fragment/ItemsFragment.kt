@@ -62,7 +62,9 @@ class ItemsFragment : Fragment() {
         })
 
         view.findViewById<ImageButton>(R.id.ib_newItem).setOnClickListener {
-            view.findNavController().navigate(R.id.action_itemsFragment_to_itemAddFragment)
+            val action =  ItemsFragmentDirections.actionItemsFragmentToItemAddFragment()
+            if (filter != null) action.setItemCategory(filter.toString())
+            view.findNavController().navigate(action)
         }
 
         view.findViewById<ImageButton>(R.id.ib_return).setOnClickListener {

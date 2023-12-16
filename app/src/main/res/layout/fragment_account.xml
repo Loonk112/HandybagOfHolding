@@ -21,50 +21,48 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
-        <TextView
-            android:text="@string/login_Colon"
-            android:textSize="20sp"
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/tv_login"
-            android:text="@string/account_login"
-            android:textSize="20sp"
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
-        <TextView
-            android:text="@string/email"
-            android:textSize="20sp"
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/tv_email"
-            android:text="@string/account_email"
-            android:textSize="20sp"
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <Space
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:padding="10dp">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
+            <TableRow
+                android:paddingVertical="2dp">
+                <TextView
+                    android:text="@string/login_Colon"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/tv_login"
+                    android:text="@string/account_login"
+                    android:textSize="20sp"/>
+            </TableRow>
+            <TableRow
+                android:paddingVertical="2dp">
+                <TextView
+                    android:text="@string/email"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:text="@string/account_email"
+                    android:textSize="20sp"/>
+            </TableRow>
+            <Space android:layout_height="0px" android:layout_weight="1"/>
+            <Button
+                android:id="@+id/b_password_reset"
+                android:text="@string/reset_password"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="30dp"
+                android:textColor="@color/red"
+                style="?android:attr/buttonBarButtonStyle" />
+        </TableLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/b_signOut"

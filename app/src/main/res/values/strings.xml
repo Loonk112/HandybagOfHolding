@@ -175,4 +175,10 @@
     <string name="wis">Wis</string>
     <string name="chr">Chr</string>
     <string name="ability_scores">Ability Scores</string>
+    <string name="Q_forgot_password">Forgot password?</string>
+    <string name="click_here">Click here!</string>
+    <string name="send_request">Send request</string>
+    <string name="return_to_login_screen">Return to login screen.</string>
+    <string name="please_input_your_e_mail_address_nif_you_registered_with_it_you_will_be_sent_password_reset_request">Please input your e-mail address.\nIf you registered with it, you will be sent password reset request.</string>
+    <string name="reset_password">Reset password</string>
 </resources>

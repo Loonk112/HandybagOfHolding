@@ -52,7 +52,9 @@ class ItemAdapter (private val itemList: ArrayList<ItemMetaData>, private val ac
                     ViewModel.db.runTransaction { transaction ->
 
                         transaction.delete(ViewModel.db.collection("items").document(itemViewModel.id))
-                        transaction.delete(ViewModel.db.collection(itemViewModel.category).document(itemViewModel.id))
+                        if (itemViewModel.category != "other") {
+                            transaction.delete(ViewModel.db.collection(itemViewModel.category).document(itemViewModel.id))
+                        }
                         transaction.delete(ViewModel.db.collection("item_notes").document(itemViewModel.id))
 
                     }.addOnSuccessListener {

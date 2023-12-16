@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_items" >
         <action
             android:id="@+id/action_itemsFragment_to_itemAddFragment"
-            app:destination="@id/itemAddFragment" />
+            app:destination="@id/itemAddFragment">
+        </action>
     </fragment>
     <fragment
         android:id="@+id/characterDetailsFragment"
@@ -33,7 +34,13 @@
         android:id="@+id/itemAddFragment"
         android:name="com.handybagofholding.fragment.ItemAddFragment"
         android:label="fragment_item_add"
-        tools:layout="@layout/fragment_item_add" />
+        tools:layout="@layout/fragment_item_add" >
+        <!--suppress NavigationFile -->
+        <argument
+            android:name="itemCategory"
+            android:defaultValue="weapons"
+            app:argType="string"/>
+    </fragment>
     <fragment
         android:id="@+id/characterEditFragment"
         android:name="com.handybagofholding.fragment.CharacterEditFragment"

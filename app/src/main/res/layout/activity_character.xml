@@ -21,6 +21,8 @@
         app:menu="@menu/bottom_nav_bar_character_menu"
         android:layout_width="match_parent"
         android:minHeight="40sp"
+        app:itemTextAppearanceActive="@style/myBottomNavigationView.Active"
+        app:itemTextAppearanceInactive="@style/myBottomNavigationView"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
